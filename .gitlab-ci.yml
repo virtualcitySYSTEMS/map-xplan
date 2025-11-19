@@ -113,7 +113,7 @@ stopEnvironment:
   variables:
     GIT_STRATEGY: none
   image:
-    name: bitnami/kubectl:latest
+    name: gitlab.virtualcitysystems.de:5050/vcsuite/devops/gitlabrunner/kubectl:latest
     entrypoint: ['']
   tags:
     - linux-2.0
@@ -194,5 +194,6 @@ publish:
     variables:
       - $PUBLISH
   script:
-    - npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
-    - npm publish --registry https://registry.npmjs.org --access public
+    - VERSION=$(node -pe "require('./package.json').version")
+    - npm run bundle
+    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file dist/@vcmap-xplan.tar.gz "${CI_API_V4_URL}/projects/317/packages/generic/vcmap-xplan/${VERSION}/vcmap-xplan-${VERSION}.tar.gz"'

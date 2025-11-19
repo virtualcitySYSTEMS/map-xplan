@@ -1,0 +1,286 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wfs:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.xplanung.de/xplangml/5/4" xmlns:wfs="http://www.opengis.net/wfs/2.0" timeStamp="2025-10-02T09:44:16Z" xmlns:gml="http://www.opengis.net/gml/3.2" numberMatched="unknown" numberReturned="0">
+  <wfs:member>
+    <xplan:BP_Plan xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_PLAN_fd15119b-4389-48a6-9fad-5a1fe1c0aec8">
+      <gml:boundedBy>
+        <gml:Envelope srsName="EPSG:25832">
+          <gml:lowerCorner>302364.672 5739133.938</gml:lowerCorner>
+          <gml:upperCorner>302417.957 5739182.272</gml:upperCorner>
+        </gml:Envelope>
+      </gml:boundedBy>
+      <xplan:name>01_031_07 - Stresemannstraße</xplan:name>
+      <xplan:nummer>01_031_07_0</xplan:nummer>
+      <xplan:internalId>774839612875#001</xplan:internalId>
+      <xplan:aendert>
+        <xplan:XP_VerbundenerPlan>
+          <xplan:planName>01_031_03 - Friedrich-Ebert-Ring - Triftstraße - Querallee - Stresemannstraße</xplan:planName>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:nummer>01_031_03_0</xplan:nummer>
+        </xplan:XP_VerbundenerPlan>
+      </xplan:aendert>
+      <xplan:raeumlicherGeltungsbereich>
+        <!--Inlined geometry 'GML-aab89d99-c366-4562-b7b4-7b7f76419f01'-->
+        <gml:Polygon gml:id="GML-aab89d99-c366-4562-b7b4-7b7f76419f01" srsName="EPSG:25832">
+          <gml:exterior>
+            <gml:LinearRing>
+              <gml:posList>302364.672 5739154.334 302368.306 5739153.913 302369.637 5739153.759 302368.015 5739139.627 302386.342 5739137.271 302412.274 5739133.938 302414.382 5739149.908 302414.670 5739152.049 302416.932 5739168.859 302417.957 5739176.620 302413.675 5739176.838 302406.210 5739177.219 302395.033 5739177.789 302386.417 5739178.228 302379.646 5739182.272 302379.397 5739181.877 302379.122 5739181.499 302378.822 5739181.141 302378.499 5739180.804 302378.155 5739180.488 302377.790 5739180.197 302377.407 5739179.937 302377.008 5739179.704 302376.594 5739179.497 302376.168 5739179.318 302375.730 5739179.168 302375.284 5739179.047 302375.190 5739179.026 302375.096 5739179.006 302375.002 5739178.987 302374.907 5739178.969 302374.813 5739178.953 302374.718 5739178.938 302374.356 5739178.894 302373.991 5739178.868 302373.626 5739178.862 302373.261 5739178.875 302372.898 5739178.906 302372.536 5739178.957 302372.202 5739179.021 302371.871 5739179.102 302371.544 5739179.198 302371.222 5739179.310 302370.906 5739179.437 302370.597 5739179.580 302367.475 5739177.887 302364.895 5739156.287 302364.672 5739154.334</gml:posList>
+            </gml:LinearRing>
+          </gml:exterior>
+        </gml:Polygon>
+      </xplan:raeumlicherGeltungsbereich>
+      <xplan:gemeinde>
+        <xplan:XP_Gemeinde>
+          <xplan:ags>05154036</xplan:ags>
+          <xplan:rs>051540036036</xplan:rs>
+          <xplan:gemeindeName>Kleve, Stadt</xplan:gemeindeName>
+          <xplan:ortsteilName>Kleve</xplan:ortsteilName>
+        </xplan:XP_Gemeinde>
+      </xplan:gemeinde>
+      <xplan:planArt>10001</xplan:planArt>
+      <xplan:verfahren>1000</xplan:verfahren>
+      <xplan:rechtsstand>4000</xplan:rechtsstand>
+      <xplan:inkrafttretensDatum>2017-02-13</xplan:inkrafttretensDatum>
+      <xplan:bereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_2d683e35-6b6e-41c8-83e1-dbe886a2861f"/>
+    </xplan:BP_Plan>
+  </wfs:member>
+  <wfs:additionalObjects>
+    <wfs:SimpleFeatureCollection>
+      <wfs:member>
+        <xplan:BP_BaugebietsTeilFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_BAUGEBIETSTEILFLAECHE_46851e74-f4d0-40d7-bc5f-2a372846f002">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302370.526 5739133.938</gml:lowerCorner>
+              <gml:upperCorner>302417.957 5739178.938</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:text>WH = Außenwandhöhe</xplan:text>
+          <xplan:gliederung1>WA 1</xplan:gliederung1>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_2d683e35-6b6e-41c8-83e1-dbe886a2861f"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML-f0c610bf-893c-490c-b923-8a703e828f0d'-->
+            <gml:Polygon gml:id="GML-f0c610bf-893c-490c-b923-8a703e828f0d" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302370.526 5739161.408 302370.532 5739161.212 302370.558 5739161.017 302370.603 5739160.826 302370.666 5739160.640 302370.747 5739160.462 302370.845 5739160.292 302370.959 5739160.132 302371.061 5739160.013 302371.173 5739159.902 302371.292 5739159.800 302371.420 5739159.709 302371.554 5739159.627 302371.694 5739159.556 302371.840 5739159.497 302371.989 5739159.449 302372.142 5739159.413 302372.297 5739159.389 302381.330 5739158.254 302392.403 5739156.862 302401.254 5739155.750 302403.477 5739155.471 302403.228 5739153.487 302402.978 5739151.502 302388.328 5739153.343 302386.342 5739137.271 302412.274 5739133.938 302414.382 5739149.908 302414.670 5739152.049 302416.932 5739168.859 302417.957 5739176.620 302413.675 5739176.838 302406.210 5739177.219 302395.033 5739177.789 302386.417 5739178.228 302383.860 5739178.384 302374.718 5739178.938 302372.215 5739176.170 302370.538 5739161.604 302370.526 5739161.408</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+              <gml:interior>
+                <gml:LinearRing>
+                  <gml:posList>302397.151 5739162.564 302398.398 5739172.486 302412.636 5739170.699 302412.471 5739169.454 302411.305 5739160.787 302397.151 5739162.564</gml:posList>
+                </gml:LinearRing>
+              </gml:interior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>true</xplan:flaechenschluss>
+          <xplan:GFZ>0.5</xplan:GFZ>
+          <xplan:GRZ>0.4</xplan:GRZ>
+          <xplan:Z>1</xplan:Z>
+          <xplan:allgArtDerBaulNutzung>1000</xplan:allgArtDerBaulNutzung>
+          <xplan:besondereArtDerBaulNutzung>1200</xplan:besondereArtDerBaulNutzung>
+          <xplan:bauweise>1000</xplan:bauweise>
+          <xplan:bebauungsArt>4000</xplan:bebauungsArt>
+        </xplan:BP_BaugebietsTeilFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_BaugebietsTeilFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_BAUGEBIETSTEILFLAECHE_6e3454be-039b-4fae-9a5f-f8151e0c9988">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302397.151 5739160.787</gml:lowerCorner>
+              <gml:upperCorner>302412.636 5739172.486</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:text>WH = Außenwandhöhe</xplan:text>
+          <xplan:gliederung1>WA 1</xplan:gliederung1>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:hatGenerAttribut>
+            <xplan:XP_StringAttribut>
+              <xplan:name>IPSymbolName</xplan:name>
+              <xplan:wert>01.01.03 Allg. Wohngebiete</xplan:wert>
+            </xplan:XP_StringAttribut>
+          </xplan:hatGenerAttribut>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_2d683e35-6b6e-41c8-83e1-dbe886a2861f"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML-a6a429ed-41d1-4e54-9471-853b6e7134da'-->
+            <gml:Polygon gml:id="GML-a6a429ed-41d1-4e54-9471-853b6e7134da" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302397.151 5739162.564 302411.305 5739160.787 302412.471 5739169.454 302412.636 5739170.699 302398.398 5739172.486 302397.151 5739162.564</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>true</xplan:flaechenschluss>
+          <xplan:GFZ>0.5</xplan:GFZ>
+          <xplan:GRZ>0.4</xplan:GRZ>
+          <xplan:Z>1</xplan:Z>
+          <xplan:allgArtDerBaulNutzung>1000</xplan:allgArtDerBaulNutzung>
+          <xplan:besondereArtDerBaulNutzung>1200</xplan:besondereArtDerBaulNutzung>
+          <xplan:bauweise>1000</xplan:bauweise>
+          <xplan:bebauungsArt>4000</xplan:bebauungsArt>
+        </xplan:BP_BaugebietsTeilFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_BaugebietsTeilFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_BAUGEBIETSTEILFLAECHE_3af6f0ca-55ba-4965-a281-078a59a4b1b7">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302368.015 5739137.271</gml:lowerCorner>
+              <gml:upperCorner>302388.328 5739155.470</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:text>WH = Außenwandhöhe</xplan:text>
+          <xplan:gliederung1>WA 2</xplan:gliederung1>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:hatGenerAttribut>
+            <xplan:XP_StringAttribut>
+              <xplan:name>IPSymbolName</xplan:name>
+              <xplan:wert>01.01.03 Allg. Wohngebiete</xplan:wert>
+            </xplan:XP_StringAttribut>
+          </xplan:hatGenerAttribut>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_2d683e35-6b6e-41c8-83e1-dbe886a2861f"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML-1361ad06-841c-4951-b83f-9f25b1b1d2be'-->
+            <gml:Polygon gml:id="GML-1361ad06-841c-4951-b83f-9f25b1b1d2be" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302368.015 5739139.627 302386.342 5739137.271 302388.328 5739153.343 302371.400 5739155.470 302370.594 5739155.210 302369.844 5739154.383 302369.670 5739153.960 302369.637 5739153.759 302368.015 5739139.627</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>true</xplan:flaechenschluss>
+          <xplan:GFZ>0.8</xplan:GFZ>
+          <xplan:GRZ>0.4</xplan:GRZ>
+          <xplan:Z>2</xplan:Z>
+          <xplan:allgArtDerBaulNutzung>1000</xplan:allgArtDerBaulNutzung>
+          <xplan:besondereArtDerBaulNutzung>1200</xplan:besondereArtDerBaulNutzung>
+          <xplan:bauweise>1000</xplan:bauweise>
+          <xplan:bebauungsArt>4000</xplan:bebauungsArt>
+        </xplan:BP_BaugebietsTeilFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_ed64b65e-e28a-4921-ad1c-1f378db611b6">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302374.996 5739163.593</gml:lowerCorner>
+              <gml:upperCorner>302390.213 5739175.284</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:hatGenerAttribut>
+            <xplan:XP_StringAttribut>
+              <xplan:name>IPSymbolName</xplan:name>
+              <xplan:wert>03.0 Ueberbaub. GrStFl</xplan:wert>
+            </xplan:XP_StringAttribut>
+          </xplan:hatGenerAttribut>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_2d683e35-6b6e-41c8-83e1-dbe886a2861f"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML-ec9c55df-0890-4e28-b47b-83abea3551fd'-->
+            <gml:Polygon gml:id="GML-ec9c55df-0890-4e28-b47b-83abea3551fd" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302374.996 5739165.349 302388.965 5739163.593 302390.213 5739173.515 302376.139 5739175.284 302374.996 5739165.349</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_5250b969-ac52-43fa-866f-b19922950d21">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302397.151 5739160.787</gml:lowerCorner>
+              <gml:upperCorner>302412.636 5739172.486</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:hatGenerAttribut>
+            <xplan:XP_StringAttribut>
+              <xplan:name>IPSymbolName</xplan:name>
+              <xplan:wert>03.0 Ueberbaub. GrStFl</xplan:wert>
+            </xplan:XP_StringAttribut>
+          </xplan:hatGenerAttribut>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_2d683e35-6b6e-41c8-83e1-dbe886a2861f"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML-ed81b3e1-25ba-4453-81ea-7fa4e8d4e56a'-->
+            <gml:Polygon gml:id="GML-ed81b3e1-25ba-4453-81ea-7fa4e8d4e56a" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302397.151 5739162.564 302411.305 5739160.787 302412.471 5739169.454 302412.636 5739170.699 302398.398 5739172.486 302397.151 5739162.564</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_bc13087e-4db2-4f6a-b899-0315f12319b7">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302391.909 5739139.561</gml:lowerCorner>
+              <gml:upperCorner>302409.023 5739151.479</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:hatGenerAttribut>
+            <xplan:XP_StringAttribut>
+              <xplan:name>IPSymbolName</xplan:name>
+              <xplan:wert>03.0 Ueberbaub. GrStFl</xplan:wert>
+            </xplan:XP_StringAttribut>
+          </xplan:hatGenerAttribut>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_2d683e35-6b6e-41c8-83e1-dbe886a2861f"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML-f2d6fd1a-f94e-48d7-86b1-bd8606d25388'-->
+            <gml:Polygon gml:id="GML-f2d6fd1a-f94e-48d7-86b1-bd8606d25388" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302391.909 5739141.554 302407.774 5739139.561 302409.023 5739149.482 302393.136 5739151.479 302391.909 5739141.554</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_6a12947e-d0fa-435b-83af-be75b0d08742">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302371.797 5739142.583</gml:lowerCorner>
+              <gml:upperCorner>302384.950 5739154.017</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:hatGenerAttribut>
+            <xplan:XP_StringAttribut>
+              <xplan:name>IPSymbolName</xplan:name>
+              <xplan:wert>03.0 Ueberbaub. GrStFl</xplan:wert>
+            </xplan:XP_StringAttribut>
+          </xplan:hatGenerAttribut>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_2d683e35-6b6e-41c8-83e1-dbe886a2861f"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML-91276eaf-06b7-4478-aeb4-d4b638fbf689'-->
+            <gml:Polygon gml:id="GML-91276eaf-06b7-4478-aeb4-d4b638fbf689" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302371.797 5739144.082 302383.724 5739142.583 302384.950 5739152.508 302372.938 5739154.017 302371.797 5739144.082</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+    </wfs:SimpleFeatureCollection>
+  </wfs:additionalObjects>
+</wfs:FeatureCollection>

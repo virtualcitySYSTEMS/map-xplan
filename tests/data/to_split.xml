@@ -1,0 +1,677 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wfs:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.xplanung.de/xplangml/5/4" xmlns:wfs="http://www.opengis.net/wfs/2.0" timeStamp="2025-10-02T13:16:02Z" xmlns:gml="http://www.opengis.net/gml/3.2" numberMatched="unknown" numberReturned="0">
+  <!--NOTE: numberReturned attribute should be 'unknown' as well, but this would not validate against the current version of the WFS 2.0 schema (change upcoming). See change request (CR 144): https://portal.opengeospatial.org/files?artifact_id=43925.-->
+  <wfs:member>
+    <xplan:BP_Plan xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_PLAN_7c33a0f2-fcaf-4369-a08b-dda107c6f0d0">
+      <gml:boundedBy>
+        <gml:Envelope srsName="EPSG:25832">
+          <gml:lowerCorner>302531.530 5741617.732</gml:lowerCorner>
+          <gml:upperCorner>302779.369 5741900.141</gml:upperCorner>
+        </gml:Envelope>
+      </gml:boundedBy>
+      <xplan:name>1-343-0_Ludwig-Jahn-Strasse_Flutstrasse_Hafenstrasse</xplan:name>
+      <xplan:nummer>01_343_0</xplan:nummer>
+      <xplan:beschreibung>Los12</xplan:beschreibung>
+      <xplan:technHerstellDatum>2024-12-09</xplan:technHerstellDatum>
+      <xplan:aendert>
+        <xplan:XP_VerbundenerPlan>
+          <xplan:planName>1-260-1_Hafenstrasse</xplan:planName>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:nummer>01_260_1</xplan:nummer>
+        </xplan:XP_VerbundenerPlan>
+      </xplan:aendert>
+      <xplan:erstellungsMassstab>500</xplan:erstellungsMassstab>
+      <xplan:raeumlicherGeltungsbereich>
+        <!--Inlined geometry 'GML_d3a848ec-a048-4c76-ada5-7e7631306cc9'-->
+        <gml:MultiSurface gml:id="GML_d3a848ec-a048-4c76-ada5-7e7631306cc9" srsName="EPSG:25832">
+          <gml:surfaceMember>
+            <gml:Polygon gml:id="GML_7120cd74-dcae-4399-8411-5c4d1bddcf86" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:Ring>
+                  <gml:curveMember>
+                    <gml:Curve gml:id="GML_3621eac1-0d4d-4c50-ac23-542b3bbdafb5" srsName="EPSG:25832">
+                      <gml:segments>
+                        <gml:LineStringSegment interpolation="linear">
+                          <gml:posList>302609.264 5741617.732 302609.352 5741617.746 302614.672 5741619.350 302618.224 5741620.420 302629.495 5741624.089 302632.252 5741625.156 302635.027 5741625.953 302645.038 5741629.144 302662.234 5741634.623 302663.658 5741635.081 302669.839 5741637.048 302679.916 5741640.255 302682.836 5741641.169 302685.699 5741642.065 302689.935 5741643.391 302698.028 5741645.924 302699.430 5741646.363 302699.545 5741646.399 302699.650 5741646.432 302710.551 5741649.838 302710.799 5741649.915 302712.713 5741650.532 302725.850 5741654.641 302730.541 5741656.115 302730.608 5741656.136 302737.132 5741658.183 302739.595 5741658.959 302745.314 5741660.757 302750.973 5741662.534 302761.761 5741665.920 302769.411 5741668.338 302777.759 5741670.960 302779.369 5741673.496 302778.553 5741688.998 302777.364 5741710.954 302777.427 5741710.966 302774.807 5741745.063 302773.561 5741760.806 302772.425 5741770.760 302771.362 5741778.699 302770.136 5741784.758 302767.400 5741793.406 302765.090 5741798.940 302762.343 5741804.401 302757.363 5741812.129 302756.692 5741812.953 302753.531 5741816.832 302752.583 5741817.996 302751.513 5741819.052 302747.943 5741822.574 302745.997 5741824.494 302738.509 5741830.115 302729.312 5741835.670 302711.466 5741844.658 302709.310 5741845.905 302701.806 5741850.246 302697.475 5741852.998 302697.237 5741852.995 302695.126 5741854.266 302688.316 5741860.648 302677.996 5741871.795 302669.912 5741880.529 302651.872 5741900.015 302649.755 5741900.141 302643.749 5741894.772 302639.894 5741891.338 302636.142 5741887.978 302628.982 5741881.585 302628.100 5741880.801 302621.377 5741874.821 302617.024 5741870.936 302612.785 5741867.166 302607.622 5741862.554 302604.981 5741860.631 302596.491 5741854.444 302594.933 5741853.307 302591.824 5741851.194 302587.357 5741848.155 302587.027 5741847.928 302579.721 5741843.256 302578.388 5741842.461 302570.705 5741837.895 302565.921 5741834.901 302564.053 5741833.757</gml:posList>
+                        </gml:LineStringSegment>
+                        <gml:ArcString interpolation="circularArc3Points" numArc="3">
+                          <gml:posList>302564.053 5741833.757 302563.411 5741833.295 302562.850 5741832.737 302562.431 5741832.095 302562.115 5741831.397 302561.962 5741830.634 302561.929 5741829.857</gml:posList>
+                        </gml:ArcString>
+                        <gml:LineStringSegment interpolation="linear">
+                          <gml:posList>302561.929 5741829.857 302561.930 5741829.833 302561.941 5741814.320 302561.804 5741805.037 302561.816 5741802.535 302561.827 5741800.037 302561.855 5741793.554 302561.903 5741783.273 302561.459 5741771.587 302560.520 5741757.589 302559.643 5741744.580 302559.392 5741742.628 302557.621 5741729.075 302557.135 5741725.301 302555.680 5741720.096 302553.529 5741712.368 302552.751 5741710.331 302552.026 5741708.431 302540.667 5741679.008 302540.451 5741678.752 302538.505 5741676.445 302531.530 5741667.846 302539.548 5741660.089 302548.290 5741651.633 302551.160 5741648.856 302551.286 5741649.060 302566.883 5741635.753 302572.546 5741630.914 302573.951 5741629.712 302577.600 5741626.586 302579.869 5741624.641 302582.639 5741622.623 302585.438 5741621.315 302587.246 5741620.469 302589.830 5741619.826 302590.585 5741619.639 302597.630 5741620.308 302597.681 5741620.096 302607.424 5741623.291 302607.755 5741622.282 302609.264 5741617.732</gml:posList>
+                        </gml:LineStringSegment>
+                      </gml:segments>
+                    </gml:Curve>
+                  </gml:curveMember>
+                </gml:Ring>
+              </gml:exterior>
+            </gml:Polygon>
+          </gml:surfaceMember>
+        </gml:MultiSurface>
+      </xplan:raeumlicherGeltungsbereich>
+      <xplan:gemeinde>
+        <xplan:XP_Gemeinde>
+          <xplan:ags>05154036</xplan:ags>
+          <xplan:gemeindeName>Kleve</xplan:gemeindeName>
+          <xplan:ortsteilName>Kleve</xplan:ortsteilName>
+        </xplan:XP_Gemeinde>
+      </xplan:gemeinde>
+      <xplan:plangeber>
+        <xplan:XP_Plangeber>
+          <xplan:name>Stadt Kleve</xplan:name>
+        </xplan:XP_Plangeber>
+      </xplan:plangeber>
+      <xplan:planArt>1000</xplan:planArt>
+      <xplan:verfahren>1000</xplan:verfahren>
+      <xplan:rechtsstand>4000</xplan:rechtsstand>
+      <xplan:inkrafttretensDatum>2024-07-14</xplan:inkrafttretensDatum>
+      <xplan:veraenderungssperre>false</xplan:veraenderungssperre>
+      <xplan:staedtebaulicherVertrag>false</xplan:staedtebaulicherVertrag>
+      <xplan:erschliessungsVertrag>false</xplan:erschliessungsVertrag>
+      <xplan:durchfuehrungsVertrag>false</xplan:durchfuehrungsVertrag>
+      <xplan:gruenordnungsplan>false</xplan:gruenordnungsplan>
+      <xplan:versionBauNVODatum>2017-11-21</xplan:versionBauNVODatum>
+      <xplan:versionBauNVOText>Baunutzungsverordnung in der Fassung der Bekanntmachung vom 21. November 2017 (BGBl. I S. 3786), die zuletzt durch Artikel 2 des Gesetzes vom 3. Juli 2023 (BGBl. 2023 I Nr. 176) geändert worden ist</xplan:versionBauNVOText>
+      <xplan:versionBauGBDatum>2017-11-03</xplan:versionBauGBDatum>
+      <xplan:versionBauGBText>Baugesetzbuch in der Fassung der Bekanntmachung vom 3. November 2017 (BGBl. I S. 3634), das zuletzt durch Artikel 1 des Gesetzes vom 28. Juli 2023 (BGBl. 2023 I Nr. 221) geändert worden ist</xplan:versionBauGBText>
+      <xplan:bereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+    </xplan:BP_Plan>
+  </wfs:member>
+  <wfs:additionalObjects>
+    <wfs:SimpleFeatureCollection>
+      <wfs:member>
+        <xplan:BP_Bereich xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302531.530 5741617.732</gml:lowerCorner>
+              <gml:upperCorner>302779.369 5741900.141</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:nummer>1</xplan:nummer>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGRENZE_5ff8b661-42db-45b6-a4c6-20b536be74a0"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_ANPFLANZUNGBINDUNGERHALTUNG_ce9610ca-2528-40d3-a586-2404a4d2e441"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_NUTZUNGSARTENGRENZE_314d58cf-6018-4f6b-ba69-e43fd1dfe108"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_0b47bd23-7c1a-43ea-b621-4ad87d398418"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_ANPFLANZUNGBINDUNGERHALTUNG_4f8fe89d-efc5-451e-b593-2b2a08cd5e78"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAULINIE_d0e3b798-e56e-4fc0-aaa3-4c621fcdfdef"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGRENZE_b677eebc-6f02-4467-9d58-ef59b6bac230"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_KENNZEICHNUNGSFLAECHE_73b57837-44cb-45cc-b50a-f1b46a73ddd9"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_bc879c68-04e1-423c-8969-d4a2864beb62"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_55d5ed2e-f2ba-4fd8-b66a-0b4c1936c292"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAULINIE_6423fe17-7d5f-4e0e-bc80-7c4d4767549b"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_ANPFLANZUNGBINDUNGERHALTUNG_a1db7c9f-bf9c-41a6-9e97-c6263dbb596b"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGRENZE_589a8059-5940-4670-bb73-d2c1481f849a"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_STRASSENVERKEHRSFLAECHE_de2b2f7b-a135-419f-b776-58cb82fb212e"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_ee6e0ff7-79e5-45f1-9f72-e41bccc8b942"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_STRASSENBEGRENZUNGSLINIE_fc930072-8b30-4751-91d6-2c18bf5c3947"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGEBIETSTEILFLAECHE_ecd665ed-5172-42a6-b1c0-4ff5c6f1584f"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_52257698-6826-4fb2-838a-849ffe4a00a0"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_GRUENFLAECHE_547e445b-c367-4a7e-b5bb-5951e1fac69c"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_54801c85-8b60-4bdc-97f5-b1ad56ea3506"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGEBIETSTEILFLAECHE_cc25f37d-3d16-42c7-9593-7f8f322194a8"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGRENZE_b30bdefb-47d7-4bae-9f33-140958e1de3d"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_SO_DENKMALSCHUTZRECHT_b8322132-2b3f-4700-8326-7794fda58b27"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGRENZE_64764f19-e67d-44d4-90a7-d399c22abb70"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_IMMISSIONSSCHUTZ_402fea84-d4a8-4e98-997a-819956024295"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_GRUENFLAECHE_71142dd8-bf09-4070-ace1-b9b4277dbe0e"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGRENZE_1f56b411-f262-497a-a713-126006c46313"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_KENNZEICHNUNGSFLAECHE_c6abc67b-e149-46ff-9d71-63b8a1f90cde"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_IMMISSIONSSCHUTZ_fc77625f-3841-4dde-9827-5a2d95c13e32"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_fc0b8133-55c2-4841-a679-434550f7a32d"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_b741d980-2d41-4b68-9122-bb7f72316d0b"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_9e0fdff8-6a60-4b55-82ed-892a060144e6"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_ANPFLANZUNGBINDUNGERHALTUNG_ff8d98a9-29cc-43ff-9966-d2dd3576fdff"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGEBIETSTEILFLAECHE_a80a410d-ed05-4f8f-b6e9-fac3411b9dda"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_b45253ba-5616-4638-9fbc-77c8e0878968"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_IMMISSIONSSCHUTZ_d1bd480a-2757-4b6e-90e8-c95e5c175025"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_8701fba7-acb1-444a-b29a-d38e051d38c9"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_VERENTSORGUNG_a818e423-cb24-4c7f-9722-8039fd9943b3"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_IMMISSIONSSCHUTZ_ed98164c-6ec2-46eb-9540-8856fffdc800"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGRENZE_1a40835a-f648-414c-8206-bc5c0391daaa"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_0ec055b7-2e0d-447f-a676-e5b25da97b2d"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGRENZE_a7b213b8-4bf9-485d-b585-c5059a362ee9"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_STRASSENVERKEHRSFLAECHE_3ed71111-ceaf-45ff-ad1e-51978bea3327"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_VERKEHRSFLAECHEBESONDERERZWECKBESTIMMUNG_78bd505d-6afd-4d22-9112-f4f5b2be58d3"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGRENZE_e3e8c673-9797-4917-8acc-0cafc8911d2e"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_SO_DENKMALSCHUTZRECHT_743baede-516a-482b-b74a-c2cb0ee5e970"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGRENZE_d8887701-cbc4-4fa8-a13d-56de61fc899c"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_SO_DENKMALSCHUTZRECHT_66d82fc2-72b1-41bb-ae23-69e8bfe75419"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGEBIETSTEILFLAECHE_3f0cb95d-95ed-4ca5-b55b-0b3913db144c"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGEBIETSTEILFLAECHE_98153d94-edeb-4bcf-974d-ebe541ae1cfb"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGEBIETSTEILFLAECHE_12fcdd98-dc56-49ac-a482-88c5d5a7dd67"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGRENZE_a5ec320f-37d3-4d91-906e-08f0ff353d80"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_4cb40963-b959-41dd-bf97-8d532a22d203"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_IMMISSIONSSCHUTZ_f5d1df2e-ba66-4f0c-ab0e-87dd18a4c3bc"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGRENZE_5a6bd8f5-afd6-4b40-80e7-e41e09c94125"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_STRASSENBEGRENZUNGSLINIE_04c10173-9be3-4110-b403-828f71c8ac1a"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BAUGRENZE_1e922406-7e76-450b-8f66-06a0a05daf67"/>
+          <xplan:planinhalt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_IMMISSIONSSCHUTZ_d54a2f46-2091-410f-82e8-633fd7fa1dfc"/>
+          <xplan:praesentationsobjekt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_XP_PPO_1263c87e-0863-4761-a2d9-95f8199a8485"/>
+          <xplan:praesentationsobjekt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_XP_PPO_0bd6614a-837d-4e2d-8cb6-09f0cc538216"/>
+          <xplan:praesentationsobjekt xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_XP_PPO_9d5f8b86-cc1a-4e6f-9695-cb9305c8248c"/>
+          <xplan:gehoertZuPlan xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_PLAN_7c33a0f2-fcaf-4369-a08b-dda107c6f0d0"/>
+        </xplan:BP_Bereich>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_0b47bd23-7c1a-43ea-b621-4ad87d398418">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302561.297 5741715.835</gml:lowerCorner>
+              <gml:upperCorner>302575.479 5741737.924</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_ce2d6c6c-f2d8-4648-ba22-ec9553635121'-->
+            <gml:Polygon gml:id="GML_ce2d6c6c-f2d8-4648-ba22-ec9553635121" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302565.117 5741737.924 302564.497 5741732.945 302563.043 5741733.127 302561.297 5741719.101 302565.238 5741718.611 302565.027 5741716.914 302566.500 5741715.835 302568.182 5741716.520 302572.797 5741715.946 302574.150 5741726.783 302574.811 5741726.700 302575.479 5741731.579 302573.005 5741731.886 302573.625 5741736.863 302565.117 5741737.924</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+              <gml:interior>
+                <gml:LinearRing>
+                  <gml:posList>302573.332 5741736.635 302572.712 5741731.658 302575.183 5741731.351 302574.586 5741726.993 302573.922 5741727.077 302572.569 5741716.239 302568.146 5741716.789 302566.537 5741716.133 302565.307 5741717.035 302565.531 5741718.839 302561.590 5741719.329 302563.271 5741732.834 302564.725 5741732.652 302565.345 5741737.631 302573.332 5741736.635</gml:posList>
+                </gml:LinearRing>
+              </gml:interior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_bc879c68-04e1-423c-8969-d4a2864beb62">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302563.101 5741744.410</gml:lowerCorner>
+              <gml:upperCorner>302578.731 5741766.617</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_40a67f30-3483-4259-8124-3122663011bd'-->
+            <gml:Polygon gml:id="GML_40a67f30-3483-4259-8124-3122663011bd" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302576.941 5741765.681 302564.050 5741766.617 302563.654 5741761.150 302565.786 5741760.995 302565.214 5741753.103 302563.479 5741753.228 302563.101 5741748.004 302564.835 5741747.877 302564.647 5741745.271 302576.496 5741744.410 302576.854 5741749.347 302575.835 5741749.420 302576.344 5741756.439 302578.050 5741756.315 302578.491 5741756.320 302578.731 5741760.754 302576.724 5741760.863 302576.941 5741765.681</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_55d5ed2e-f2ba-4fd8-b66a-0b4c1936c292">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302591.977 5741690.132</gml:lowerCorner>
+              <gml:upperCorner>302740.785 5741852.402</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_a0bb6dc1-db81-4a82-ae53-8c0e2f638cec'-->
+            <gml:Polygon gml:id="GML_a0bb6dc1-db81-4a82-ae53-8c0e2f638cec" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302680.967 5741845.706 302670.527 5741836.091 302664.350 5741830.396 302658.431 5741824.940 302651.630 5741818.823 302648.699 5741816.144 302642.496 5741811.269 302635.334 5741807.648 302627.852 5741804.943 302619.984 5741803.817 302616.478 5741803.592 302617.708 5741788.272 302597.821 5741787.628 302592.850 5741733.813 302591.977 5741720.679 302592.150 5741705.736 302594.094 5741700.812 302609.608 5741690.132 302621.445 5741694.331 302630.525 5741697.609 302631.906 5741698.115 302636.819 5741699.507 302644.634 5741712.760 302653.833 5741715.188 302647.420 5741733.880 302648.606 5741740.720 302648.807 5741741.746 302740.785 5741822.926 302726.891 5741831.291 302709.088 5741840.257 302706.807 5741841.577 302699.265 5741845.940 302688.236 5741852.402 302680.967 5741845.706</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_ee6e0ff7-79e5-45f1-9f72-e41bccc8b942">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302598.553 5741812.649</gml:lowerCorner>
+              <gml:upperCorner>302616.120 5741828.471</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_a7010419-382e-4751-8823-4a2ee248440e'-->
+            <gml:Polygon gml:id="GML_a7010419-382e-4751-8823-4a2ee248440e" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302614.437 5741828.471 302598.553 5741826.547 302600.236 5741812.649 302616.120 5741814.572 302614.437 5741828.471</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_BaugebietsTeilFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_BAUGEBIETSTEILFLAECHE_ecd665ed-5172-42a6-b1c0-4ff5c6f1584f">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302578.608 5741684.188</gml:lowerCorner>
+              <gml:upperCorner>302747.943 5741860.648</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:gliederung1>1</xplan:gliederung1>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_f0f35ada-a403-473e-81d1-b5f96e3b01b4'-->
+            <gml:Polygon gml:id="GML_f0f35ada-a403-473e-81d1-b5f96e3b01b4" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302593.739 5741797.218 302593.686 5741797.223 302588.328 5741739.220 302584.085 5741739.584 302582.906 5741721.842 302578.608 5741705.518 302585.924 5741700.415 302585.223 5741699.817 302607.806 5741684.188 302623.129 5741689.623 302632.234 5741692.911 302633.450 5741693.356 302640.108 5741695.242 302645.864 5741705.002 302657.258 5741708.010 302656.528 5741710.777 302660.249 5741711.894 302655.258 5741726.441 302652.486 5741734.521 302653.387 5741739.120 302656.744 5741742.083 302665.835 5741750.106 302692.333 5741773.493 302714.970 5741793.473 302724.432 5741801.821 302747.943 5741822.574 302745.997 5741824.494 302738.509 5741830.115 302729.312 5741835.670 302711.466 5741844.658 302709.310 5741845.905 302701.806 5741850.246 302697.475 5741852.998 302697.237 5741852.995 302695.126 5741854.266 302688.316 5741860.648 302688.268 5741859.229 302686.539 5741857.636 302668.292 5741840.831 302660.961 5741834.072 302655.065 5741828.637 302657.074 5741826.471 302654.874 5741824.431 302650.286 5741820.304 302647.405 5741817.670 302641.416 5741812.964 302634.540 5741809.488 302627.365 5741806.894 302619.778 5741805.808 302616.323 5741805.586 302617.712 5741788.224 302612.705 5741788.110 302607.124 5741793.525 302602.786 5741795.596 302600.744 5741796.571 302593.739 5741797.218</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>true</xplan:flaechenschluss>
+          <xplan:GFZ>2.4</xplan:GFZ>
+          <xplan:GRZ>0.6</xplan:GRZ>
+          <xplan:Zmin>2</xplan:Zmin>
+          <xplan:Zmax>4</xplan:Zmax>
+          <xplan:besondereArtDerBaulNutzung>1500</xplan:besondereArtDerBaulNutzung>
+          <xplan:bauweise>3000</xplan:bauweise>
+        </xplan:BP_BaugebietsTeilFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_52257698-6826-4fb2-838a-849ffe4a00a0">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302633.216 5741870.807</gml:lowerCorner>
+              <gml:upperCorner>302660.163 5741896.918</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_9c60490a-4fdd-4782-8b31-3f8eb40118fb'-->
+            <gml:Polygon gml:id="GML_9c60490a-4fdd-4782-8b31-3f8eb40118fb" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302650.651 5741896.918 302633.216 5741881.310 302642.436 5741870.807 302660.163 5741886.643 302650.651 5741896.918</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+              <gml:interior>
+                <gml:LinearRing>
+                  <gml:posList>302659.789 5741886.661 302642.458 5741871.179 302633.585 5741881.287 302650.634 5741896.550 302659.789 5741886.661</gml:posList>
+                </gml:LinearRing>
+              </gml:interior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_54801c85-8b60-4bdc-97f5-b1ad56ea3506">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302621.495 5741820.450</gml:lowerCorner>
+              <gml:upperCorner>302642.755 5741841.534</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_6a208711-c8cc-4b25-a329-0dfcc81476aa'-->
+            <gml:Polygon gml:id="GML_6a208711-c8cc-4b25-a329-0dfcc81476aa" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302633.491 5741841.534 302621.495 5741830.946 302630.759 5741820.450 302642.755 5741831.037 302633.491 5741841.534</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_BaugebietsTeilFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_BAUGEBIETSTEILFLAECHE_cc25f37d-3d16-42c7-9593-7f8f322194a8">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302561.804 5741805.037</gml:lowerCorner>
+              <gml:upperCorner>302688.316 5741900.141</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:gliederung1>2</xplan:gliederung1>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_356b0c92-7483-4f2e-b7c9-1648d118ea27'-->
+            <gml:Polygon gml:id="GML_356b0c92-7483-4f2e-b7c9-1648d118ea27" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:Ring>
+                  <gml:curveMember>
+                    <gml:Curve gml:id="GML_8ddebfdf-171c-4928-b08e-111695110a6a" srsName="EPSG:25832">
+                      <gml:segments>
+                        <gml:LineStringSegment interpolation="linear">
+                          <gml:posList>302688.316 5741860.648 302677.996 5741871.795 302669.912 5741880.529 302651.872 5741900.015 302649.755 5741900.141 302643.749 5741894.772 302639.894 5741891.338 302636.142 5741887.978 302628.982 5741881.585 302628.100 5741880.801 302621.377 5741874.821 302617.024 5741870.936 302612.785 5741867.166 302607.622 5741862.554 302604.981 5741860.631 302596.491 5741854.444 302594.933 5741853.307 302591.824 5741851.194 302587.357 5741848.155 302587.027 5741847.928 302579.721 5741843.256 302578.388 5741842.461 302570.705 5741837.895 302565.921 5741834.901 302564.053 5741833.757</gml:posList>
+                        </gml:LineStringSegment>
+                        <gml:ArcString interpolation="circularArc3Points" numArc="3">
+                          <gml:posList>302564.053 5741833.757 302563.411 5741833.295 302562.850 5741832.737 302562.431 5741832.095 302562.115 5741831.397 302561.962 5741830.634 302561.929 5741829.857</gml:posList>
+                        </gml:ArcString>
+                        <gml:LineStringSegment interpolation="linear">
+                          <gml:posList>302561.929 5741829.857 302561.930 5741829.833 302561.941 5741814.320 302561.804 5741805.037 302569.204 5741805.532 302595.626 5741807.330 302609.406 5741808.147 302611.091 5741808.257 302619.469 5741808.794 302626.635 5741809.820 302633.349 5741812.247 302639.797 5741815.507 302645.463 5741819.960 302648.271 5741822.527 302655.065 5741828.637 302660.961 5741834.072 302668.292 5741840.831 302686.539 5741857.636 302688.268 5741859.229 302688.316 5741860.648</gml:posList>
+                        </gml:LineStringSegment>
+                      </gml:segments>
+                    </gml:Curve>
+                  </gml:curveMember>
+                </gml:Ring>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>true</xplan:flaechenschluss>
+          <xplan:GFZ>0.6</xplan:GFZ>
+          <xplan:GRZ>0.3</xplan:GRZ>
+          <xplan:Z>2</xplan:Z>
+          <xplan:besondereArtDerBaulNutzung>1200</xplan:besondereArtDerBaulNutzung>
+          <xplan:bauweise>1000</xplan:bauweise>
+        </xplan:BP_BaugebietsTeilFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_fc0b8133-55c2-4841-a679-434550f7a32d">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302681.746 5741643.391</gml:lowerCorner>
+              <gml:upperCorner>302774.444 5741805.448</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_63ca3fd5-4845-4c5d-b511-570f9a423d89'-->
+            <gml:Polygon gml:id="GML_63ca3fd5-4845-4c5d-b511-570f9a423d89" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302698.028 5741645.924 302699.430 5741646.363 302699.545 5741646.399 302699.650 5741646.432 302710.551 5741649.838 302710.799 5741649.915 302712.713 5741650.532 302725.850 5741654.641 302730.541 5741656.115 302730.608 5741656.136 302737.132 5741658.183 302739.595 5741658.959 302745.314 5741660.757 302750.973 5741662.534 302761.761 5741665.920 302769.411 5741668.338 302774.444 5741669.919 302774.277 5741675.107 302773.560 5741688.731 302772.222 5741713.445 302769.822 5741744.674 302768.583 5741760.325 302767.463 5741770.145 302766.428 5741777.871 302765.288 5741783.504 302762.700 5741791.685 302760.544 5741796.851 302757.996 5741801.916 302755.745 5741805.448 302681.746 5741740.140 302695.907 5741699.154 302705.607 5741671.060 302683.421 5741664.215 302689.935 5741643.391 302698.028 5741645.924</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_b741d980-2d41-4b68-9122-bb7f72316d0b">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302637.964 5741835.156</gml:lowerCorner>
+              <gml:upperCorner>302659.224 5741856.240</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_2e4ec78c-e4e9-4879-a998-28808c5b18dd'-->
+            <gml:Polygon gml:id="GML_2e4ec78c-e4e9-4879-a998-28808c5b18dd" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302649.960 5741856.240 302637.964 5741845.653 302647.228 5741835.156 302659.224 5741845.744 302649.960 5741856.240</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_9e0fdff8-6a60-4b55-82ed-892a060144e6">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302532.241 5741617.732</gml:lowerCorner>
+              <gml:upperCorner>302677.983 5741707.664</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_4452e637-6c97-4427-a134-afa558d5f6a8'-->
+            <gml:Polygon gml:id="GML_4452e637-6c97-4427-a134-afa558d5f6a8" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302677.983 5741639.640 302663.603 5741686.305 302638.081 5741679.077 302605.584 5741667.484 302575.487 5741688.314 302573.522 5741689.510 302576.123 5741693.780 302553.288 5741707.664 302549.859 5741702.818 302548.574 5741699.488 302555.136 5741694.798 302540.560 5741674.453 302538.505 5741676.445 302532.241 5741668.723 302532.353 5741667.049 302539.548 5741660.089 302548.290 5741651.633 302551.160 5741648.856 302551.286 5741649.060 302566.883 5741635.753 302572.546 5741630.914 302573.951 5741629.712 302577.600 5741626.586 302579.869 5741624.641 302582.639 5741622.623 302585.438 5741621.315 302587.246 5741620.469 302589.830 5741619.826 302590.585 5741619.639 302597.630 5741620.308 302597.681 5741620.096 302607.424 5741623.291 302607.755 5741622.282 302609.264 5741617.732 302609.352 5741617.746 302614.672 5741619.350 302618.224 5741620.420 302629.495 5741624.089 302632.252 5741625.156 302635.027 5741625.953 302645.038 5741629.144 302662.234 5741634.623 302663.658 5741635.081 302669.839 5741637.048 302677.983 5741639.640</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_BaugebietsTeilFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_BAUGEBIETSTEILFLAECHE_a80a410d-ed05-4f8f-b6e9-fac3411b9dda">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302669.899 5741642.065</gml:lowerCorner>
+              <gml:upperCorner>302779.369 5741710.954</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:gliederung1>2</xplan:gliederung1>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_f5afa27e-042e-4c04-9dc0-b4ea36fd30c1'-->
+            <gml:Polygon gml:id="GML_f5afa27e-042e-4c04-9dc0-b4ea36fd30c1" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302691.181 5741697.521 302686.356 5741696.498 302685.930 5741696.407 302669.899 5741693.010 302685.699 5741642.065 302689.935 5741643.391 302698.028 5741645.924 302699.430 5741646.363 302699.545 5741646.399 302699.650 5741646.432 302710.551 5741649.838 302710.799 5741649.915 302712.713 5741650.532 302725.850 5741654.641 302730.541 5741656.115 302730.608 5741656.136 302737.132 5741658.183 302739.595 5741658.959 302745.314 5741660.757 302750.973 5741662.534 302761.761 5741665.920 302769.411 5741668.338 302777.759 5741670.960 302779.369 5741673.496 302778.553 5741688.998 302777.364 5741710.954 302765.528 5741710.122 302754.932 5741709.294 302754.886 5741709.636 302748.415 5741709.085 302742.619 5741708.606 302735.396 5741707.996 302728.887 5741707.457 302728.094 5741707.389 302728.079 5741707.530 302721.865 5741707.127 302717.921 5741706.574 302713.725 5741705.667 302689.735 5741701.706 302691.181 5741697.521</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>true</xplan:flaechenschluss>
+          <xplan:GFZ>1.8</xplan:GFZ>
+          <xplan:GRZ>0.6</xplan:GRZ>
+          <xplan:Zmin>2</xplan:Zmin>
+          <xplan:Zmax>3</xplan:Zmax>
+          <xplan:besondereArtDerBaulNutzung>1500</xplan:besondereArtDerBaulNutzung>
+          <xplan:bauweise>3000</xplan:bauweise>
+        </xplan:BP_BaugebietsTeilFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_b45253ba-5616-4638-9fbc-77c8e0878968">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302660.079 5741854.384</gml:lowerCorner>
+              <gml:upperCorner>302681.223 5741875.635</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_6714cb71-650d-4eee-a47b-754ce07f8d95'-->
+            <gml:Polygon gml:id="GML_6714cb71-650d-4eee-a47b-754ce07f8d95" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302670.354 5741875.635 302660.079 5741866.126 302670.949 5741854.384 302681.223 5741863.894 302670.354 5741875.635</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_8701fba7-acb1-444a-b29a-d38e051d38c9">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302566.871 5741809.322</gml:lowerCorner>
+              <gml:upperCorner>302612.670 5741856.440</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_394970af-67b7-434c-b894-c5d8463edfcf'-->
+            <gml:Polygon gml:id="GML_394970af-67b7-434c-b894-c5d8463edfcf" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302604.323 5741856.440 302598.259 5741852.021 302596.661 5741850.854 302593.512 5741848.714 302589.051 5741845.679 302588.686 5741845.428 302581.298 5741840.703 302579.923 5741839.883 302572.267 5741835.334 302567.500 5741832.350 302566.928 5741832.000 302566.871 5741809.529 302580.869 5741809.322 302580.934 5741824.198 302587.084 5741827.854 302588.656 5741828.791 302596.426 5741833.760 302596.955 5741834.124 302601.386 5741837.138 302604.724 5741839.407 302606.512 5741840.712 302612.670 5741845.199 302604.323 5741856.440</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_0ec055b7-2e0d-447f-a676-e5b25da97b2d">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302565.573 5741773.668</gml:lowerCorner>
+              <gml:upperCorner>302582.214 5741793.384</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_6ffd61e0-582d-41c7-b0e4-e6169c618e86'-->
+            <gml:Polygon gml:id="GML_6ffd61e0-582d-41c7-b0e4-e6169c618e86" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302567.236 5741792.334 302567.211 5741791.653 302566.082 5741791.695 302565.955 5741788.194 302567.085 5741788.152 302566.903 5741783.101 302566.737 5741778.121 302565.701 5741778.159 302565.573 5741774.615 302566.608 5741774.576 302566.586 5741773.984 302575.352 5741773.668 302575.503 5741777.840 302576.363 5741777.808 302576.578 5741782.512 302580.824 5741782.359 302580.850 5741782.648 302581.007 5741787.156 302581.996 5741787.121 302582.214 5741793.218 302578.340 5741793.384 302578.288 5741791.935 302567.236 5741792.334</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_BaugebietsTeilFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_BAUGEBIETSTEILFLAECHE_3f0cb95d-95ed-4ca5-b55b-0b3913db144c">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302555.680 5741705.518</gml:lowerCorner>
+              <gml:upperCorner>302594.206 5741802.275</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:gliederung1>1</xplan:gliederung1>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_4bef2ca2-5480-411f-91db-b390751c9f0c'-->
+            <gml:Polygon gml:id="GML_4bef2ca2-5480-411f-91db-b390751c9f0c" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302561.855 5741793.554 302561.903 5741783.273 302561.459 5741771.587 302560.520 5741757.589 302559.643 5741744.580 302559.392 5741742.628 302557.621 5741729.075 302557.135 5741725.301 302555.680 5741720.096 302571.292 5741710.621 302578.608 5741705.518 302582.906 5741721.842 302584.085 5741739.584 302588.328 5741739.220 302593.686 5741797.223 302593.739 5741797.218 302594.206 5741802.275 302561.827 5741800.037 302561.855 5741793.554</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>true</xplan:flaechenschluss>
+          <xplan:GFZ>0.6</xplan:GFZ>
+          <xplan:GRZ>0.3</xplan:GRZ>
+          <xplan:Z>2</xplan:Z>
+          <xplan:besondereArtDerBaulNutzung>1200</xplan:besondereArtDerBaulNutzung>
+          <xplan:bauweise>1000</xplan:bauweise>
+        </xplan:BP_BaugebietsTeilFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_BaugebietsTeilFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_BAUGEBIETSTEILFLAECHE_98153d94-edeb-4bcf-974d-ebe541ae1cfb">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302675.920 5741701.706</gml:lowerCorner>
+              <gml:upperCorner>302777.427 5741812.953</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:gliederung1>1</xplan:gliederung1>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_050b9846-fc36-4879-882f-75cf34d8aa2e'-->
+            <gml:Polygon gml:id="GML_050b9846-fc36-4879-882f-75cf34d8aa2e" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302753.028 5741809.719 302675.920 5741741.684 302689.735 5741701.706 302713.725 5741705.667 302717.921 5741706.574 302721.865 5741707.127 302728.079 5741707.530 302728.094 5741707.389 302728.887 5741707.457 302735.396 5741707.996 302742.619 5741708.606 302748.415 5741709.085 302754.886 5741709.636 302754.932 5741709.294 302765.528 5741710.122 302777.364 5741710.954 302777.427 5741710.966 302774.807 5741745.063 302773.561 5741760.806 302772.425 5741770.760 302771.362 5741778.699 302770.136 5741784.758 302767.400 5741793.406 302765.090 5741798.940 302762.343 5741804.401 302757.363 5741812.129 302756.692 5741812.953 302753.028 5741809.719</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>true</xplan:flaechenschluss>
+          <xplan:GFZ>2.4</xplan:GFZ>
+          <xplan:GRZ>0.6</xplan:GRZ>
+          <xplan:Zmin>2</xplan:Zmin>
+          <xplan:Zmax>4</xplan:Zmax>
+          <xplan:besondereArtDerBaulNutzung>1500</xplan:besondereArtDerBaulNutzung>
+          <xplan:bauweise>3000</xplan:bauweise>
+        </xplan:BP_BaugebietsTeilFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_BaugebietsTeilFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_BAUGEBIETSTEILFLAECHE_12fcdd98-dc56-49ac-a482-88c5d5a7dd67">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302531.530 5741617.732</gml:lowerCorner>
+              <gml:upperCorner>302682.836 5741710.331</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:gliederung1>2</xplan:gliederung1>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_fdb531e4-6e5d-426f-8c4b-419276c394c8'-->
+            <gml:Polygon gml:id="GML_fdb531e4-6e5d-426f-8c4b-419276c394c8" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302677.732 5741657.627 302676.181 5741662.627 302666.952 5741692.385 302666.943 5741692.383 302666.289 5741694.289 302665.537 5741694.129 302663.659 5741693.596 302635.920 5741685.741 302634.969 5741685.393 302625.825 5741682.091 302606.621 5741675.279 302579.302 5741694.186 302569.943 5741699.886 302552.751 5741710.331 302552.026 5741708.431 302540.667 5741679.008 302540.451 5741678.752 302538.505 5741676.445 302531.530 5741667.846 302539.548 5741660.089 302548.290 5741651.633 302551.160 5741648.856 302551.286 5741649.060 302566.883 5741635.753 302572.546 5741630.914 302573.951 5741629.712 302577.600 5741626.586 302579.869 5741624.641 302582.639 5741622.623 302585.438 5741621.315 302587.246 5741620.469 302589.830 5741619.826 302590.585 5741619.639 302597.630 5741620.308 302597.681 5741620.096 302607.424 5741623.291 302607.755 5741622.282 302609.264 5741617.732 302609.352 5741617.746 302614.672 5741619.350 302618.224 5741620.420 302629.495 5741624.089 302632.252 5741625.156 302635.027 5741625.953 302645.038 5741629.144 302662.234 5741634.623 302663.658 5741635.081 302669.839 5741637.048 302679.916 5741640.255 302682.836 5741641.169 302677.732 5741657.627</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>true</xplan:flaechenschluss>
+          <xplan:GFZ>1.8</xplan:GFZ>
+          <xplan:GRZ>0.6</xplan:GRZ>
+          <xplan:Zmin>2</xplan:Zmin>
+          <xplan:Zmax>3</xplan:Zmax>
+          <xplan:besondereArtDerBaulNutzung>1500</xplan:besondereArtDerBaulNutzung>
+          <xplan:bauweise>3000</xplan:bauweise>
+        </xplan:BP_BaugebietsTeilFlaeche>
+      </wfs:member>
+      <wfs:member>
+        <xplan:BP_UeberbaubareGrundstuecksFlaeche xmlns:xplan="http://www.xplanung.de/xplangml/5/4" gml:id="XPLAN_BP_UEBERBAUBAREGRUNDSTUECKSFLAECHE_4cb40963-b959-41dd-bf97-8d532a22d203">
+          <gml:boundedBy>
+            <gml:Envelope srsName="EPSG:25832">
+              <gml:lowerCorner>302609.173 5741848.732</gml:lowerCorner>
+              <gml:upperCorner>302637.956 5741877.337</gml:upperCorner>
+            </gml:Envelope>
+          </gml:boundedBy>
+          <xplan:ebene>0</xplan:ebene>
+          <xplan:gehoertZuBereich xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#XPLAN_BP_BEREICH_ef0a00ad-39c5-4391-b0fb-aaf300d39ce0"/>
+          <xplan:rechtscharakter>1000</xplan:rechtscharakter>
+          <xplan:position>
+            <!--Inlined geometry 'GML_e53b6477-1486-4693-bb9d-cb95e501170c'-->
+            <gml:Polygon gml:id="GML_e53b6477-1486-4693-bb9d-cb95e501170c" srsName="EPSG:25832">
+              <gml:exterior>
+                <gml:LinearRing>
+                  <gml:posList>302637.956 5741866.816 302628.720 5741877.337 302609.509 5741860.217 302609.173 5741859.972 302617.520 5741848.732 302618.314 5741849.310 302637.956 5741866.816</gml:posList>
+                </gml:LinearRing>
+              </gml:exterior>
+            </gml:Polygon>
+          </xplan:position>
+          <xplan:flaechenschluss>false</xplan:flaechenschluss>
+        </xplan:BP_UeberbaubareGrundstuecksFlaeche>
+      </wfs:member>
+    </wfs:SimpleFeatureCollection>
+  </wfs:additionalObjects>
+</wfs:FeatureCollection>
