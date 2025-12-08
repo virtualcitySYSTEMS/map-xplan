@@ -82,11 +82,26 @@ class PlanIframeWmsFeatureInfoView extends AbstractFeatureInfoView {
       featureInfo,
       layer,
     );
-    componentOptions.props.src = this._getFeatureInfoUrl(
-      featureInfo,
-      layer,
-      app,
-    );
+    const src = this._getFeatureInfoUrl(featureInfo, layer, app);
+    componentOptions.props.src = src;
+    const action = {
+      name: 'legend.openInNew',
+      title: 'legend.openInNew',
+      icon: '$vcsExternalLink',
+      callback(): void {
+        if (src) {
+          window.open(src, '_blank');
+        }
+      },
+    };
+    if (componentOptions.state) {
+      componentOptions.state.headerActions = [action];
+    } else {
+      componentOptions.state = {
+        headerActions: [action],
+        headerActionsOverflow: 3,
+      };
+    }
     return componentOptions;
   }
 

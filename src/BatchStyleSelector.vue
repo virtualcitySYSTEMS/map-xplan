@@ -7,7 +7,7 @@
   import { name } from '../package.json';
   import type { XplanPlugin } from './index.js';
   import type { Plan, XplanBoxService } from './xplanAPI.js';
-  import cubeStyles from './cubeStyles.js';
+  import { predefinedStyles, defaultStyles } from './cubeStyles.js';
 
   const app = inject<VcsUiApp>('vcsApp')!;
   const plugin = app.plugins.getByKey(name) as XplanPlugin;
@@ -19,9 +19,13 @@
     const additionalStyles = plugin.config.additionalStyles3d
       .map((styleName) => app.styles.getByKey(styleName))
       .filter((s) => !!s);
-    return [...additionalStyles, ...cubeStyles].map((style) => ({
-      value: style.name,
-      label: (style.properties?.title as string) || style.name,
+    return [
+      defaultStyles[props.service],
+      ...predefinedStyles,
+      ...additionalStyles,
+    ].map((style) => ({
+      value: style.name!,
+      label: (style.properties?.title as string) || style.name!,
     }));
   }
 

@@ -1,9 +1,61 @@
 import type { ProjectionOptions } from '@vcmap/core';
 import type { PlanQuery, XplanBoxService } from './xplanAPI';
-import cubeStyles from './cubeStyles.js';
+import { defaultStyles } from './cubeStyles.js';
 
 export const xplanWindowId = 'xplan-window-id';
 export const bplanFilterWindowId = 'xplan-filter-window-id';
+
+export const RECHTSSTAND_VALUES = [
+  '1000',
+  '2000',
+  '2100',
+  '2200',
+  '2250',
+  '2300',
+  '2400',
+  '3000',
+  '4000',
+  '4500',
+  '45000',
+  '45001',
+  '5000',
+  '50000',
+  '50001',
+] as const;
+export type Rechtsstand = (typeof RECHTSSTAND_VALUES)[number];
+
+export const RECHTSSTAND_NAME: Record<Rechtsstand, string> = {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '1000': 'Aufstellungsbeschluss',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '2000': 'ImVerfahren',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '2100': 'FruehzeitigeBehoerdenBeteiligung',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '2200': 'FruehzeitigeOeffentlichkeitsBeteiligung',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '2250': 'Entwurfsbeschluss',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '2300': 'BehoerdenBeteiligung',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '2400': 'OeffentlicheAuslegung',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '3000': 'Satzung',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '4000': 'InKraftGetreten',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '4500': 'TeilweiseUntergegangen',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '45000': 'TeilweiseAufgehoben',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '45001': 'TeilweiseAusserKraft',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '5000': 'Untergegangen',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '50000': 'Aufgehoben',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '50001': 'AusserKraft',
+};
 
 export const DEFAULT_STOREY_ATTRIBUTE_PRIORITY = [
   'Z',
@@ -156,11 +208,13 @@ export enum BPPlanListAttribute {
   NUMMER = 'nummer',
 }
 
+export type Style3dOptions = Record<XplanBoxService, string>;
+
 export type XplanConfig = {
   projection: ProjectionOptions;
   bpPlanListAttribute: BPPlanListAttribute;
   additionalStyles3d: string[];
-  defaultStyle3d: string;
+  defaultStyle3d: Style3dOptions;
   xplanBoxUrl: string;
   xplanBoxServices: XplanBoxService[];
   filterInitiallyOpen: boolean;
@@ -178,7 +232,11 @@ export default function getDefaultOptions(): XplanConfig {
     xplanBoxServices: ['current', 'pre'],
     filterInitiallyOpen: true,
     additionalStyles3d: [],
-    defaultStyle3d: cubeStyles[0].name,
+    defaultStyle3d: {
+      pre: defaultStyles.pre.name!,
+      current: defaultStyles.current.name!,
+      archive: defaultStyles.archive.name!,
+    },
     cubeCreationOptions: getDefaultCubeCreationOptions(),
   };
 }
@@ -188,6 +246,10 @@ export function getMergedConfig(config: XplanConfig): XplanConfig {
   return {
     ...defaultConfig,
     ...config,
+    defaultStyle3d: {
+      ...defaultConfig.defaultStyle3d,
+      ...config.defaultStyle3d,
+    },
     cubeCreationOptions: {
       ...defaultConfig.cubeCreationOptions,
       ...config.cubeCreationOptions,
@@ -214,4 +276,38 @@ export function getEmptyFilter(config: XplanConfig): PlanQuery {
     ...getDefaultFilterOptions(),
     sortBy: config.bpPlanListAttribute,
   };
+}
+
+export function getDefaultPageSizes(): Record<XplanBoxService, number> {
+  return {
+    current: 10,
+    pre: 5,
+    archive: 5,
+  };
+}
+
+/**
+ * Determines the page size for each service.
+ * Since a longer list offers the greatest advantage in the "current" service,
+ * the page size of the missing services is added to "current."
+ * @param services The services configured
+ * @returns Page sizes for each passed in service
+ */
+export function getPageSizesFor(
+  services: XplanBoxService[],
+): Partial<Record<XplanBoxService, number>> {
+  const defaultPageSizes = getDefaultPageSizes();
+  const pageSizes: Partial<Record<XplanBoxService, number>> = {};
+  services.forEach((service) => {
+    pageSizes[service] = defaultPageSizes[service];
+    if (service === 'current') {
+      if (!services.includes('pre')) {
+        pageSizes[service] += defaultPageSizes.pre;
+      }
+      if (!services.includes('archive')) {
+        pageSizes[service] += defaultPageSizes.archive;
+      }
+    }
+  });
+  return pageSizes;
 }

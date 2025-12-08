@@ -1,5 +1,116 @@
 /* eslint-disable no-template-curly-in-string */
-export default [
+import type { DeclarativeStyleItemOptions } from '@vcmap/core';
+import type { XplanBoxService } from './xplanAPI.js';
+
+export const defaultStyles: Record<
+  XplanBoxService,
+  DeclarativeStyleItemOptions
+> = {
+  pre: {
+    type: 'DeclarativeStyleItem',
+    name: 'xplan-baufeld-InAufstellung',
+    properties: {
+      title: 'xplan.style.baufeldPre',
+      legend: [
+        {
+          type: 'StyleLegendItem',
+          colNr: 1,
+          rows: [
+            {
+              type: 'FillLegendRow',
+              fill: {
+                color: '#ffffca70',
+              },
+              stroke: {
+                color: [50, 50, 50, 1],
+                width: 2,
+              },
+              title: 'xplan.style.legend.baufeldPre',
+            },
+          ],
+        },
+      ],
+    },
+    declarativeStyle: {
+      show: 'true',
+      color: {
+        conditions: [['true', "color('#ffffca70')"]],
+      },
+      strokeColor: "color('rgb(50, 50, 50)')",
+      strokeWidth: '3',
+    },
+  },
+  current: {
+    type: 'DeclarativeStyleItem',
+    name: 'xplan-baufeld-Rechtskraeftig',
+    properties: {
+      title: 'xplan.style.baufeldCurrent',
+      legend: [
+        {
+          type: 'StyleLegendItem',
+          colNr: 1,
+          rows: [
+            {
+              type: 'FillLegendRow',
+              fill: {
+                color: '#FFEAE370',
+              },
+              stroke: {
+                color: [50, 50, 50, 1],
+                width: 2,
+              },
+              title: 'xplan.style.legend.baufeldCurrent',
+            },
+          ],
+        },
+      ],
+    },
+    declarativeStyle: {
+      show: 'true',
+      color: {
+        conditions: [['true', "color('#FFEAE370')"]],
+      },
+      strokeColor: "color('rgb(50, 50, 50)')",
+      strokeWidth: '3',
+    },
+  },
+  archive: {
+    type: 'DeclarativeStyleItem',
+    name: 'xplan-baufeld-Archiviert',
+    properties: {
+      title: 'xplan.style.baufeldArchive',
+      legend: [
+        {
+          type: 'StyleLegendItem',
+          colNr: 1,
+          rows: [
+            {
+              type: 'FillLegendRow',
+              fill: {
+                color: '#DCDCDC',
+              },
+              stroke: {
+                color: '#323232',
+                width: 2,
+              },
+              title: 'xplan.style.legend.baufeldArchive',
+            },
+          ],
+        },
+      ],
+    },
+    declarativeStyle: {
+      show: 'true',
+      color: {
+        conditions: [['true', "color('#DCDCDC')"]],
+      },
+      strokeColor: "color('rgb(50, 50, 50)')",
+      strokeWidth: '3',
+    },
+  },
+};
+
+export const predefinedStyles = [
   {
     type: 'DeclarativeStyleItem',
     name: 'xplan-white-transparent',
@@ -65,6 +176,40 @@ export default [
         conditions: [['true', "color('#44444470')"]],
       },
       strokeColor: "color('rgb(255,255, 255)')",
+      strokeWidth: '3',
+    },
+  },
+  {
+    type: 'DeclarativeStyleItem',
+    name: 'xplan-green-transparent',
+    properties: {
+      title: 'xplan.style.greenTransparent',
+      legend: [
+        {
+          type: 'StyleLegendItem',
+          colNr: 1,
+          rows: [
+            {
+              type: 'FillLegendRow',
+              fill: {
+                color: '#409d7670',
+              },
+              stroke: {
+                color: [50, 50, 50, 1],
+                width: 2,
+              },
+              title: 'xplan.style.legend.baufeld3d',
+            },
+          ],
+        },
+      ],
+    },
+    declarativeStyle: {
+      show: 'true',
+      color: {
+        conditions: [['true', "color('#409d7670')"]],
+      },
+      strokeColor: "color('rgb(50, 50, 50)')",
       strokeWidth: '3',
     },
   },
@@ -337,3 +482,7 @@ export default [
     },
   },
 ];
+
+export function getAllCubeStyles(): DeclarativeStyleItemOptions[] {
+  return [...Object.values(defaultStyles), ...predefinedStyles];
+}

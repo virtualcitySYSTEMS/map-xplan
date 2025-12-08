@@ -37,7 +37,7 @@ Unterstützte XPlanung-Versionen:
 | xplanBoxServices    | `Array<'pre' \| 'current' \| 'archive'>` | `['current', 'pre']`                | Liste der zu verwendenden XPlanBox-Services (pre = Vorentwurf, current = aktuell, archive = archiviert)                                                                   |
 | filterInitiallyOpen | `boolean`                                | `true`                              | Gibt an, ob das Filterfenster beim initialen Aktivieren des Plugins geöffnet ist                                                                                          |
 | additionalStyles3d  | `string[]`                               | `[]`                                | Liste zusätzlicher Styles, die für die Darstellung der Baufenster zur Verfügung stehen. Müssen in der app config konfiguriert und hier anhand des Namens verlinkt werden. |
-| defaultStyle3d      | `string`                                 | `'xplan-white-transparent'`         | Name des Standard-3D-Styles für die Darstellung der Baufenster                                                                                                            |
+| defaultStyle3d      | `Style3dOptions`                         | [siehe unten](#style3doptions)      | Name des Standard-3D-Styles für die Darstellung der Baufenster, pro Service                                                                                               |
 | cubeCreationOptions | `CubeCreationOptions`                    | [siehe unten](#cubecreationoptions) | Optionen für die Erstellung der 3D-Baufenster                                                                                                                             |
 
 ### ProjectionOptions
@@ -46,6 +46,14 @@ Unterstützte XPlanung-Versionen:
 | ------ | -------- | ----------------------------------------------------- | --------------------------------------- |
 | epsg   | `string` | `'EPSG:25832'`                                        | EPSG-Code des Koordinatensystems        |
 | proj4  | `string` | `'+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs'` | Proj4-Definition des Koordinatensystems |
+
+### Style3dOptions
+
+| Option  | Default                          | Beschreibung                           |
+| ------- | -------------------------------- | -------------------------------------- |
+| pre     | `'xplan-baufeld-InAufstellung'`  | Standard-Stil für Pläne in Aufstellung |
+| current | `'xplan-baufeld-Rechtskraeftig'` | Standard-Stil für rechtskräftige Pläne |
+| archive | `'xplan-baufeld-Archiviert'`     | Standard-Stil für archivierte Pläne    |
 
 ### CubeCreationOptions
 

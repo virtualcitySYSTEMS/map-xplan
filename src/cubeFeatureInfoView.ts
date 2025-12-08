@@ -253,6 +253,7 @@ export default class CubeFeatureInfoView extends AbstractFeatureInfoView {
 
     return {
       ...properties,
+      tags: {},
       calculatedHeights,
       storeyRows: getStoreyAttributeRows(
         featureInfo.feature as unknown as Feature,

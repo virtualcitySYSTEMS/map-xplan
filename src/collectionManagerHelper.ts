@@ -164,6 +164,7 @@ export function createBPlanCollectionManager(
         title: `xplan.bplans.${id}`,
         collection,
         selectable: true,
+        limit: 20,
       },
       name,
     );
@@ -259,8 +260,8 @@ function createRemoveSelectedAction(
     callback(): void {
       const addedPlansCollection = addedPlansCollectionComponent.collection;
       collectionComponent.selection.value.forEach((item) => {
-        const feature = collectionComponent.collection.getByKey(item.name)!;
-        if (addedPlansCollection.has(feature)) {
+        const feature = addedPlansCollection.getByKey(item.name);
+        if (feature) {
           addedPlansCollection.remove(feature);
         }
       });
@@ -321,7 +322,7 @@ export function createOverviewCollectionManager(
         destroyActionMap.delete(planId);
         layer.removeFeaturesById([planId]);
         if (app.featureInfo.selectedFeature?.getId() === planId) {
-          app.featureInfo.clear();
+          app.featureInfo.clearSelection();
         }
       }
     });
@@ -329,9 +330,18 @@ export function createOverviewCollectionManager(
       layer.addFeatures([plan as Plan]);
     });
 
-    const watcher = watch(
+    const selectionWatcher = watch(
       collectionComponent.selection,
       handleSelectionChange.bind(undefined, app, layer),
+    );
+    const paginationWatcher = watch(
+      collectionComponent.pagination,
+      async (pagination) => {
+        if (pagination) {
+          await pagination.initialize();
+          collectionComponent.title.value = `${app.vueI18n.t(`xplan.bplans.${id}`)}: ${pagination?.totalCount} ${app.vueI18n.t('xplan.bplans.plans')}`;
+        }
+      },
     );
 
     const { action: zoomToSelectionAction, destroy: destroyZoomToSelection } =
@@ -361,7 +371,8 @@ export function createOverviewCollectionManager(
       removed,
       destroyAddAction,
       destroyRemoveAction,
-      watcher,
+      selectionWatcher,
+      paginationWatcher,
       destroyZoomToSelection,
       destroyLayerStateAction,
     );

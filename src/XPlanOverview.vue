@@ -31,15 +31,15 @@
   provide('collectionManager', plugin.overviewCollectionManager);
 
   const filterAction: VcsAction = reactive({
-    name: 'xplan.filter.heading',
-    title: 'xplan.filter.heading',
+    name: 'xplan.filter.open',
+    title: 'xplan.filter.open',
     icon: 'mdi-filter',
     active: app.windowManager.has(bplanFilterWindowId),
     callback(): void {
       if (app.windowManager.has(bplanFilterWindowId)) {
         app.windowManager.remove(bplanFilterWindowId);
       } else {
-        app.windowManager.add(getFilterWindowComponent(), name);
+        app.windowManager.add(getFilterWindowComponent(app), name);
       }
     },
   });
@@ -105,8 +105,13 @@
       <VcsTreeviewSearchbar
         v-model="search"
         :disabled="filterAction.active"
-        :placeholder="`xplan.filter.searchbar${plugin.config.bpPlanListAttribute}`"
+        :placeholder="
+          filterAction.active
+            ? 'xplan.filter.searchbarDisabled'
+            : `xplan.filter.searchbar${plugin.config.bpPlanListAttribute}`
+        "
         :loading="searchLoading"
+        :class="{ 'search-selected': !filterAction.active }"
         @update:model-value="updateFilter"
       >
         <!-- @vue-ignore component seems to not expose slot typings -->
@@ -118,3 +123,10 @@
     <CollectionManagerComponent />
   </div>
 </template>
+
+<style lang="css" scoped>
+  .search-selected :deep(input::placeholder) {
+    color: rgb(var(--v-theme-primary)) !important;
+    opacity: 1 !important;
+  }
+</style>

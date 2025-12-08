@@ -21,7 +21,11 @@
     TERRAIN_LEVEL_METHOD_VALUES,
   } from '../defaultOptions.js';
   import { XPLAN_BOX_SERVICES } from '../xplanAPI.js';
-  import cubeStyles from '../cubeStyles.js';
+  import {
+    predefinedStyles,
+    defaultStyles,
+    getAllCubeStyles,
+  } from '../cubeStyles.js';
   import PriorityList from './PriorityList.vue';
 
   const app = inject<VcsUiApp>('vcsApp')!;
@@ -33,13 +37,14 @@
 
   const config = props.getConfig();
   const localConfig = ref<XplanConfig>(getMergedConfig(config));
+  const allCubeStyles = getAllCubeStyles();
   const additionalStyleItems = [...app.styles]
-    .filter((s) => !cubeStyles.map((style) => style.name).includes(s.name))
+    .filter((s) => !allCubeStyles.map((style) => style.name).includes(s.name))
     .map((s) => ({ value: s.name, title: s.properties?.title || s.name }));
   const defaultStyleItems = computed(() => {
     return [
-      ...cubeStyles.map((s) => ({
-        value: s.name,
+      ...getAllCubeStyles().map((s) => ({
+        value: s.name!,
         title: s.properties?.title || s.name,
       })),
       ...localConfig.value.additionalStyles3d.map((styleName) => {
@@ -54,9 +59,16 @@
   watch(
     () => localConfig.value.additionalStyles3d,
     (value) => {
-      if (!value.includes(localConfig.value.defaultStyle3d)) {
-        localConfig.value.defaultStyle3d = defaultStyleItems.value[0].value;
-      }
+      localConfig.value.xplanBoxServices.forEach((service) => {
+        if (
+          ![...value, ...predefinedStyles.map((s) => s.name)].includes(
+            localConfig.value.defaultStyle3d[service],
+          )
+        ) {
+          localConfig.value.defaultStyle3d[service] =
+            defaultStyles[service].name!;
+        }
+      });
     },
   );
 
@@ -200,15 +212,21 @@
             />
           </v-col>
         </v-row>
-        <v-row no-gutters>
+        <v-row
+          v-for="service in localConfig.xplanBoxServices"
+          :key="service"
+          no-gutters
+        >
           <v-col>
-            <VcsLabel html-for="xplan-editor-defaultStyle3d">
-              {{ $st('xplan.editor.defaultStyle3d') }}
+            <VcsLabel :html-for="`xplan-editor-defaultStyle3d-${service}`">
+              {{ $st('xplan.editor.defaultStyle3d') }}:
+              {{ $st(`xplan.bplans.${service}`) }}
             </VcsLabel>
           </v-col>
           <v-col>
             <VcsSelect
-              v-model="localConfig.defaultStyle3d"
+              :id="`xplan-editor-defaultStyle3d-${service}`"
+              v-model="localConfig.defaultStyle3d[service]"
               :items="defaultStyleItems"
             />
           </v-col>

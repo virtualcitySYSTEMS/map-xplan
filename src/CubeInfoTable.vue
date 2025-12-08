@@ -101,6 +101,14 @@
       v-if="props.hoehenRows.length > 0"
       heading="xplan.featureInfo.hoehenRows"
     >
+      <template #help>
+        <ul>
+          <li>BTF: {{ $st('xplan.featureInfo.baugebietsTeilFlaeche') }}</li>
+          <li>
+            UGF: {{ $st('xplan.featureInfo.ueberbaubareGrundstuecksFlaeche') }}
+          </li>
+        </ul>
+      </template>
       <vcs-data-table
         :headers="rowHeaders"
         :items="props.hoehenRows"
@@ -119,6 +127,14 @@
       v-if="props.storeyRows.length > 0"
       heading="xplan.featureInfo.storeyRows"
     >
+      <template #help>
+        <ul>
+          <li>BTF: {{ $st('xplan.featureInfo.baugebietsTeilFlaeche') }}</li>
+          <li>
+            UGF: {{ $st('xplan.featureInfo.ueberbaubareGrundstuecksFlaeche') }}
+          </li>
+        </ul>
+      </template>
       <vcs-data-table
         :headers="storeyHeaders"
         :items="props.storeyRows"

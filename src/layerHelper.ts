@@ -8,11 +8,14 @@ import {
   CesiumMap,
   mercatorProjection,
   type Projection,
+  type VectorStyleItemFill,
 } from '@vcmap/core';
 import { type CesiumTerrainProvider } from '@vcmap-cesium/engine';
 import {
   NotificationType,
   type FeatureInfoViewOptions,
+  type FillLegendRow,
+  type StyleLegendItem,
   type VcsUiApp,
 } from '@vcmap/ui';
 import {
@@ -28,45 +31,74 @@ import {
   BEZUGSPUNKT_NAME,
   HOEHENBEZUG_NAME,
 } from './defaultOptions.js';
-import cubeStyles from './cubeStyles.js';
+import { defaultStyles, predefinedStyles } from './cubeStyles.js';
 import type { PlanIframeWmsFeatureInfoViewOptions } from './planIframeWmsFeatureInfoView.js';
 import CubeFeatureInfoView, {
   CALCULATED_HEIGHT_ATTRIBUTES,
 } from './cubeFeatureInfoView.js';
 import PlanIframeWmsFeatureInfoView from './planIframeWmsFeatureInfoView.js';
 
-const defaultPlanStyle: Record<XplanBoxService, VectorStyleItemOptions> = {
-  current: {
-    name: 'Geltungsbereich-current',
-    fill: {
-      color: [255, 234, 227, 0.7],
+function createPlanLegend(
+  style: VectorStyleItemOptions,
+  service: XplanBoxService,
+): StyleLegendItem {
+  const row: FillLegendRow = {
+    type: 'FillLegendRow',
+    fill: style.fill as VectorStyleItemFill,
+    stroke: style.stroke as object,
+    title: `xplan.bplans.${service}`,
+  };
+  return {
+    type: 'StyleLegendItem',
+    colNr: 1,
+    rows: [row],
+  };
+}
+
+export function getDefaultPlanStyle(
+  service: XplanBoxService,
+  legend?: boolean,
+): VectorStyleItemOptions {
+  const styles: Record<XplanBoxService, VectorStyleItemOptions> = {
+    current: {
+      name: 'Geltungsbereich-current',
+      fill: {
+        color: [255, 234, 227, 0.7],
+      },
+      stroke: {
+        color: [77, 77, 77, 1],
+        width: 2,
+      },
     },
-    stroke: {
-      color: [77, 77, 77, 1],
-      width: 2,
+    pre: {
+      name: 'Geltungsbereich-pre',
+      fill: {
+        color: [255, 255, 202, 0.7],
+      },
+      stroke: {
+        color: [77, 77, 77, 1],
+        width: 2,
+      },
     },
-  },
-  pre: {
-    name: 'Geltungsbereich-pre',
-    fill: {
-      color: [255, 255, 202, 0.7],
+    archive: {
+      name: 'Geltungsbereich-archive',
+      fill: {
+        color: [220, 220, 220, 0.7],
+      },
+      stroke: {
+        color: [77, 77, 77, 1],
+        width: 2,
+      },
     },
-    stroke: {
-      color: [77, 77, 77, 1],
-      width: 2,
-    },
-  },
-  archive: {
-    name: 'Geltungsbereich-archive',
-    fill: {
-      color: [220, 220, 220, 0.7],
-    },
-    stroke: {
-      color: [77, 77, 77, 1],
-      width: 2,
-    },
-  },
-};
+  };
+  const style = styles[service];
+  if (legend) {
+    style.properties = {
+      legend: [createPlanLegend(style, service)],
+    };
+  }
+  return styles[service];
+}
 
 export const featureInfoClassMap = new Map<
   string,
@@ -212,9 +244,10 @@ export function createPlanLayer(
 ): VectorLayer {
   const layer = new VectorLayer({
     projection,
-    style: new VectorStyleItem(defaultPlanStyle[service]),
+    style: new VectorStyleItem(getDefaultPlanStyle(service)),
     properties: {
       featureInfo: featureInfos.plan.name,
+      title: 'xplan.bplans.plan2d',
     },
     vectorProperties: {
       classificationType: 'terrain',
@@ -249,6 +282,7 @@ export async function addPlan2dLayer(
     featureInfo: {
       responseType: 'text/html',
       featureInfoFormat: 'WMSGetFeatureInfo',
+      htmlPositionFeatureTitle: plan.get('nummer'),
       extent: {
         coordinates: plan.getGeometry()?.getExtent(),
         projection: mercatorProjection.toJSON(),
@@ -324,10 +358,12 @@ export async function addPlan3dLayer(
     const layer = new VectorLayer({
       projection: mercatorProjection.toJSON(),
       name: `${plan.getId()}_3d`,
-      style: app.styles.getByKey(defaultStyle3d),
+      style: app.styles.getByKey(defaultStyle3d[service]),
       properties: {
+        title: plan.get(plugin.config.bpPlanListAttribute),
         availableStyles: [
-          ...cubeStyles.map((s) => s.name),
+          defaultStyles[service].name,
+          ...predefinedStyles.map((s) => s.name),
           ...additionalStyles3d,
         ],
         featureInfo: featureInfos.plan3d.name,
@@ -336,6 +372,9 @@ export async function addPlan3dLayer(
     layer[xplanBPlanSymbol] = plan;
     layer[xplanServiceSymbol] = service;
     app.layers.add(layer);
+    features.forEach((f) => {
+      f.set('title', 'xplan.bplans.plan3d');
+    });
     layer.addFeatures(features);
   }
 }

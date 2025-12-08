@@ -32,7 +32,9 @@ export function getXPlanWindowComponent(app: VcsUiApp): WindowComponentOptions {
   };
 }
 
-export function getFilterWindowComponent(): WindowComponentOptions {
+export function getFilterWindowComponent(
+  app: VcsUiApp,
+): WindowComponentOptions {
   return {
     id: bplanFilterWindowId,
     component: BPlanFilter,
@@ -40,6 +42,9 @@ export function getFilterWindowComponent(): WindowComponentOptions {
     state: {
       headerTitle: 'xplan.filter.windowTitle',
       headerIcon: 'mdi-filter',
+      infoUrlCallback: app.getHelpUrlCallback(
+        'tools/xplanTool.html#id_filterDialog',
+      ),
     },
   };
 }
@@ -66,7 +71,7 @@ export function createNavbarButton(app: VcsUiApp): () => void {
         const windowComponent = getXPlanWindowComponent(app);
         windowManager.add(windowComponent, name);
         if (isFirstOpen) {
-          app.windowManager.add(getFilterWindowComponent(), name);
+          app.windowManager.add(getFilterWindowComponent(app), name);
         }
       }
     },

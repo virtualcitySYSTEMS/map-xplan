@@ -98,7 +98,7 @@ export const XPLAN_NS: Record<XplanVersion, string> = Object.freeze({
   // eslint-disable-next-line @typescript-eslint/naming-convention
   '5.4': 'http://www.xplanung.de/xplangml/5/4',
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  '6.0': 'http://www.xplanung.de/xplangml/6',
+  '6.0': 'http://www.xplanung.de/xplangml/6/0',
 });
 
 const SYN_WFS_NS = 'http://www.deegree.org/xplanung/1/0';
@@ -139,7 +139,17 @@ function getGeojsonFormat(): GeoJSONFormat {
 function createFilter(query: PlanQuery): Filter | undefined {
   const filters: Filter[] = [];
   if (query.gemeinde) {
-    filters.push(like('xplan:gemeinde', `*Gemeinde: ${query.gemeinde}*`));
+    filters.push(
+      like(
+        'xplan:gemeinde',
+        // TODO: GIBT ES IMMER EINEN ORTSTEIL??
+        `*Gemeinde: *${query.gemeinde}*Ortsteil*`,
+        undefined,
+        undefined,
+        undefined,
+        false,
+      ),
+    );
   }
   if (query.name) {
     filters.push(

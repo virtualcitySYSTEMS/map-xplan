@@ -437,6 +437,7 @@
       open-all
       open-on-click
       :show-searchbar="true"
+      searchbar-placeholder="xplan.bplans.addedSearch"
     />
     <VcsHelp v-else text="xplan.bplans.noAdded" />
     <v-dialog

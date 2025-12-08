@@ -19,6 +19,8 @@ import { name, version, mapVersion } from '../package.json';
 import getDefaultOptions, {
   type CubeCreationOptions,
   getMergedConfig,
+  getPageSizesFor,
+  type Style3dOptions,
   type XplanConfig,
 } from './defaultOptions.js';
 import { createNavbarButton } from './createNavbarButton.js';
@@ -31,7 +33,7 @@ import {
   featureInfoClassMap,
   featureInfos,
 } from './layerHelper.js';
-import cubeStyles from './cubeStyles.js';
+import { getAllCubeStyles } from './cubeStyles.js';
 import createContextMenu from './createContextMenu.js';
 import {
   getHits,
@@ -110,8 +112,10 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
     },
     cubeCreationOptions,
     async setOverviewFilter(query: PlanQuery): Promise<void> {
+      const pageSizes = getPageSizesFor(config.xplanBoxServices);
       const promises =
         overviewCollectionManager?.componentIds.map(async (service) => {
+          const pageSize = pageSizes[service as XplanBoxService];
           const collectionComponent = overviewCollectionManager?.get(service);
           if (collectionComponent) {
             const hits = await getHits(
@@ -164,7 +168,7 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
                   total: items.length ? hits : 0,
                 };
               },
-              defaultPageSize: query.count,
+              defaultPageSize: pageSize,
             });
             return collectionComponent.pagination.value!.initialize();
           }
@@ -201,7 +205,7 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
           getLogger(name).error(`Constructor for ${featureInfo.type} missing`);
         }
       });
-      await app.styles.parseItems(cubeStyles, volatileModuleId);
+      await app.styles.parseItems(getAllCubeStyles(), volatileModuleId);
 
       await Promise.all(
         config.xplanBoxServices.map(async (service) => {
@@ -238,7 +242,7 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
         l.destroy();
       });
       planLayers.clear();
-      cubeStyles.forEach((style) => {
+      getAllCubeStyles().forEach((style) => {
         const item = app?.styles.getByKey(style.name);
         if (item) {
           app?.styles.remove(item);
@@ -284,8 +288,18 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
         serialized.additionalStyles3d = [...mergedConfig.additionalStyles3d];
       }
 
-      if (mergedConfig.defaultStyle3d !== defaultOptions.defaultStyle3d) {
-        serialized.defaultStyle3d = mergedConfig.defaultStyle3d;
+      const serializedDefaultStyle3d: Partial<Style3dOptions> = {};
+      mergedConfig.xplanBoxServices.forEach((service) => {
+        if (
+          mergedConfig.defaultStyle3d[service] !==
+          defaultOptions.defaultStyle3d[service]
+        ) {
+          serializedDefaultStyle3d[service] =
+            mergedConfig.defaultStyle3d[service];
+        }
+      });
+      if (Object.keys(serializedDefaultStyle3d).length) {
+        serialized.defaultStyle3d = serializedDefaultStyle3d as Style3dOptions;
       }
 
       if (mergedConfig.xplanBoxUrl) {
