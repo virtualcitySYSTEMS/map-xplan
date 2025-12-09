@@ -44,7 +44,6 @@ export type CalculatedHeights = Record<
 
 const STOREY_ATTRIBUTES = [
   ...DEFAULT_STOREY_ATTRIBUTE_PRIORITY,
-  'Zmin',
   'Z_Staffel',
 ] as const;
 
