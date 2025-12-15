@@ -98,6 +98,9 @@
 
   const submit = (): void => {
     const c = structuredClone(toRaw(localConfig.value));
+    c.xplanBoxServices.sort((a, b) => {
+      return XPLAN_BOX_SERVICES.indexOf(a) - XPLAN_BOX_SERVICES.indexOf(b);
+    });
     props.setConfig(c);
   };
 </script>
@@ -157,7 +160,7 @@
                 }))
               "
               multiple
-              placeholder="xplan.editor.servicesPlaceholder"
+              :placeholder="$st('xplan.editor.servicesPlaceholder')"
               :rules="[requiredRule]"
             />
           </v-col>

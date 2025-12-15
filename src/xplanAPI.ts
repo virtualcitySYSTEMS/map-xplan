@@ -30,7 +30,7 @@ import { intersect } from '@turf/intersect';
 import { type CesiumTerrainProvider } from '@vcmap-cesium/engine';
 import pgk from '../package.json';
 import { createCubes } from './createCubes.js';
-import type { CubeCreationOptions } from './defaultOptions';
+import type { CubeCreationOptions, PlanArt } from './defaultOptions';
 
 export const xplanFeatureTypeSymbol: unique symbol = Symbol('XplanFeatureType');
 const PLANINHALT_FEATURE_TYPE = [
@@ -70,6 +70,8 @@ export type PlanQuery = {
   number?: string;
   // exact
   rechtsstand?: string[];
+  // exact
+  planArt?: PlanArt[];
   // gte
   inkrafttretensDatum?: Date;
   count?: number;
@@ -193,6 +195,16 @@ function createFilter(query: PlanQuery): Filter | undefined {
       rechtsstandComparisons.length > 1
         ? or(...rechtsstandComparisons)
         : rechtsstandComparisons[0],
+    );
+  }
+  if (query.planArt && query.planArt.length > 0) {
+    const planArtComparisons = query.planArt.map((planArt) =>
+      equalTo('xplan:planArt', planArt),
+    );
+    filters.push(
+      planArtComparisons.length > 1
+        ? or(...planArtComparisons)
+        : planArtComparisons[0],
     );
   }
   if (query.inkrafttretensDatum) {

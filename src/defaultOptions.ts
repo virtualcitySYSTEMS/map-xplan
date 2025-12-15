@@ -57,6 +57,23 @@ export const RECHTSSTAND_NAME: Record<Rechtsstand, string> = {
   '50001': 'AusserKraft',
 };
 
+export const PLAN_ART_VALUES = [
+  '1000',
+  '10000',
+  '10001',
+  '10002',
+  '3000',
+  '3100',
+  '4000',
+  '40000',
+  '40001',
+  '40002',
+  '5000',
+  '7000',
+  '9999',
+] as const;
+export type PlanArt = (typeof PLAN_ART_VALUES)[number];
+
 export const DEFAULT_STOREY_ATTRIBUTE_PRIORITY = [
   'Z',
   'Zmax',
@@ -219,6 +236,7 @@ export type XplanConfig = {
   xplanBoxServices: XplanBoxService[];
   filterInitiallyOpen: boolean;
   cubeCreationOptions: CubeCreationOptions;
+  minZIndex: number;
 };
 
 export default function getDefaultOptions(): XplanConfig {
@@ -229,7 +247,7 @@ export default function getDefaultOptions(): XplanConfig {
     },
     bpPlanListAttribute: BPPlanListAttribute.NAME,
     xplanBoxUrl: '',
-    xplanBoxServices: ['current', 'pre'],
+    xplanBoxServices: ['pre', 'current'],
     filterInitiallyOpen: true,
     additionalStyles3d: [],
     defaultStyle3d: {
@@ -238,6 +256,7 @@ export default function getDefaultOptions(): XplanConfig {
       archive: defaultStyles.archive.name!,
     },
     cubeCreationOptions: getDefaultCubeCreationOptions(),
+    minZIndex: 10,
   };
 }
 
@@ -263,6 +282,7 @@ function getDefaultFilterOptions(): PlanQuery {
     number: undefined,
     name: undefined,
     rechtsstand: [],
+    planArt: ['1000', '10000', '10001', '10002', '3000', '3100'],
     inkrafttretensDatum: undefined,
     startIndex: 0,
     count: 10,

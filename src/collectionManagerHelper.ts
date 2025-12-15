@@ -419,11 +419,17 @@ export function createAddedPlansCollectionManager(
   const addedPlansManager = createBPlanCollectionManager(plugin);
 
   const listeners: (() => void)[] = [];
-  addedPlansManager.componentIds.forEach((id) => {
+  (addedPlansManager.componentIds as XplanBoxService[]).forEach((id) => {
     const { collection } = addedPlansManager.get(id)!;
     const added = collection.added.addEventListener(async (plan) => {
-      await addPlan2dLayer(app, plan as Plan, id as XplanBoxService);
-      await addPlan3dLayer(app, plan as Plan, id as XplanBoxService);
+      const zIndex = [...plugin.config.xplanBoxServices].reverse().indexOf(id);
+      await addPlan2dLayer(
+        app,
+        plan as Plan,
+        id,
+        zIndex + plugin.config.minZIndex,
+      );
+      await addPlan3dLayer(app, plan as Plan, id);
     });
     const removed = collection.removed.addEventListener((plan) => {
       removePlan2dLayer(app, plan as Plan);

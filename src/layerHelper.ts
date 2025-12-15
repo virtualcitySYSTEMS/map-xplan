@@ -269,6 +269,7 @@ export async function addPlan2dLayer(
   app: VcsUiApp,
   plan: Plan,
   service: XplanBoxService,
+  zIndex: number,
 ): Promise<void> {
   const layer = new WMSLayer({
     name: `${plan.getId()}_2d`,
@@ -292,6 +293,7 @@ export async function addPlan2dLayer(
       featureInfo: featureInfos.plan2d.name,
       title: plan.get('name'),
     },
+    zIndex,
   }) as Xplan2dLayer;
   layer[xplanBPlanSymbol] = plan;
   layer[xplanServiceSymbol] = service;
