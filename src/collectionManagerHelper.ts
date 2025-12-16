@@ -1,5 +1,6 @@
 import { reactive, ref, watch } from 'vue';
 import {
+  CesiumMap,
   Collection,
   Extent,
   mercatorProjection,
@@ -334,15 +335,24 @@ export function createOverviewCollectionManager(
       collectionComponent.selection,
       handleSelectionChange.bind(undefined, app, layer),
     );
+
+    const updateTitle = (): void => {
+      const { pagination } = collectionComponent;
+      collectionComponent.title.value = pagination.value
+        ? `${app.vueI18n.t(`xplan.bplans.${id}`)}: ${pagination.value.totalCount} ${app.vueI18n.t('xplan.bplans.plans')}`
+        : `xplan.bplans.${id}`;
+    };
+
     const paginationWatcher = watch(
       collectionComponent.pagination,
       async (pagination) => {
         if (pagination) {
           await pagination.initialize();
-          collectionComponent.title.value = `${app.vueI18n.t(`xplan.bplans.${id}`)}: ${pagination?.totalCount} ${app.vueI18n.t('xplan.bplans.plans')}`;
+          updateTitle();
         }
       },
     );
+    const localeWatcher = watch(app.vueI18n.locale, updateTitle);
 
     const { action: zoomToSelectionAction, destroy: destroyZoomToSelection } =
       createZoomToSelectionAction(app, collectionComponent);
@@ -373,6 +383,7 @@ export function createOverviewCollectionManager(
       destroyRemoveAction,
       selectionWatcher,
       paginationWatcher,
+      localeWatcher,
       destroyZoomToSelection,
       destroyLayerStateAction,
     );
@@ -418,7 +429,20 @@ export function createAddedPlansCollectionManager(
 ): CollectionManager {
   const addedPlansManager = createBPlanCollectionManager(plugin);
 
-  const listeners: (() => void)[] = [];
+  const defered3dLayers = new Map<Plan, () => Promise<void>>();
+  const listeners: (() => void)[] = [
+    app.maps.mapActivated.addEventListener(async (map) => {
+      if (map instanceof CesiumMap) {
+        await Promise.allSettled(
+          defered3dLayers.entries().map(async ([plan, cb]) => {
+            defered3dLayers.delete(plan);
+            await cb();
+          }),
+        );
+      }
+    }),
+  ];
+
   (addedPlansManager.componentIds as XplanBoxService[]).forEach((id) => {
     const { collection } = addedPlansManager.get(id)!;
     const added = collection.added.addEventListener(async (plan) => {
@@ -429,11 +453,21 @@ export function createAddedPlansCollectionManager(
         id,
         zIndex + plugin.config.minZIndex,
       );
-      await addPlan3dLayer(app, plan as Plan, id);
+      if (app.maps.activeMap instanceof CesiumMap) {
+        await addPlan3dLayer(app, plan as Plan, id);
+      } else {
+        defered3dLayers.set(plan as Plan, async () => {
+          await addPlan3dLayer(app, plan as Plan, id);
+        });
+      }
     });
     const removed = collection.removed.addEventListener((plan) => {
       removePlan2dLayer(app, plan as Plan);
-      removePlan3dLayer(app, plan as Plan);
+      if (defered3dLayers.has(plan as Plan)) {
+        defered3dLayers.delete(plan as Plan);
+      } else {
+        removePlan3dLayer(app, plan as Plan);
+      }
       const items = [...app.clippingPolygons].filter((cp) =>
         cp.name.includes(String((plan as Plan).getId())),
       );
@@ -450,6 +484,7 @@ export function createAddedPlansCollectionManager(
     listeners.forEach((l) => {
       l();
     });
+    defered3dLayers.clear();
   };
 
   return addedPlansManager;

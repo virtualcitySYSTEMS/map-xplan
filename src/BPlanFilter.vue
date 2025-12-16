@@ -105,9 +105,22 @@
     layer.destroy();
   });
 
-  function resetFilter(): void {
-    filterOptions.value = getEmptyFilter(plugin.config);
-    layer.removeAllFeatures();
+  function createResetAction(type: 'attribute' | 'spatial'): VcsAction {
+    return {
+      name: 'xplan.filter.reset',
+      title: 'xplan.filter.reset',
+      icon: '$vcsReturn',
+      callback(): void {
+        const emptyFilter = getEmptyFilter(plugin.config);
+        if (type === 'spatial') {
+          filterOptions.value.bbox = emptyFilter.bbox;
+          layer.removeAllFeatures();
+        } else if (type === 'attribute') {
+          const currentBBox = structuredClone(toRaw(filterOptions.value.bbox));
+          filterOptions.value = { ...emptyFilter, bbox: currentBBox };
+        }
+      },
+    };
   }
   const spatialFilterAction = reactive<VcsAction>({
     name: 'xplan.filter.spatial',
@@ -145,7 +158,10 @@
     spatialFilterAction.active = !!createFeatureSession.value;
   });
 
-  const spatialHeaderActions: VcsAction[] = [spatialFilterAction];
+  const spatialHeaderActions: VcsAction[] = [
+    spatialFilterAction,
+    createResetAction('spatial'),
+  ];
 
   const rechtsstandStructure: Record<XplanBoxService, Rechtsstand[]> = {
     pre: ['1000', '2000', '2100', '2200', '2250', '2300', '2400'],
@@ -254,7 +270,10 @@
         {{ $st('xplan.filter.spatialDescription') }}
       </div>
     </VcsFormSection>
-    <VcsFormSection heading="xplan.filter.attribute">
+    <VcsFormSection
+      heading="xplan.filter.attribute"
+      :header-actions="[createResetAction('attribute')]"
+    >
       <v-container class="px-1 py-0">
         <v-row no-gutters>
           <v-col>
@@ -379,25 +398,18 @@
         </v-row>
       </v-container>
       <v-divider />
-      <div class="d-flex align-center justify-space-between px-2 pb-1 pt-2">
+      <div class="d-flex align-center justify-end px-2 pb-1 pt-2">
         <VcsFormButton
-          icon="$vcsReturn"
-          tooltip="xplan.filter.reset"
-          @click="resetFilter"
-        />
-        <div>
-          <VcsFormButton
-            :loading="loading"
-            variant="filled"
-            class="mr-2"
-            @click="sendRequest"
-          >
-            {{ $st('xplan.filter.apply') }}</VcsFormButton
-          >
-          <VcsFormButton @click="app.windowManager.remove(bplanFilterWindowId)">
-            {{ $st('xplan.filter.cancel') }}</VcsFormButton
-          >
-        </div>
+          :loading="loading"
+          variant="filled"
+          class="mr-2"
+          @click="sendRequest"
+        >
+          {{ $st('xplan.filter.apply') }}</VcsFormButton
+        >
+        <VcsFormButton @click="app.windowManager.remove(bplanFilterWindowId)">
+          {{ $st('xplan.filter.cancel') }}</VcsFormButton
+        >
       </div>
     </VcsFormSection>
   </div>
