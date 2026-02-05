@@ -322,7 +322,7 @@
     const groupItem = new GroupContentTreeItem(
       {
         name: `${node}.${plan.getId()}`,
-        title: plan.getProperty('name'),
+        title: plan.getProperty(plugin.config.bpPlanListAttribute),
       },
       app,
     );

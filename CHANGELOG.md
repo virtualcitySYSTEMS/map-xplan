@@ -1,3 +1,7 @@
+# v1.0.2
+
+- fix bug where not always the configured bpPlanListAttribute was displayed
+
 # v1.0.1
 
 - fix bug where zmin was listed twice in feature info

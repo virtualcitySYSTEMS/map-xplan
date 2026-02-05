@@ -271,6 +271,7 @@ export async function addPlan2dLayer(
   service: XplanBoxService,
   zIndex: number,
 ): Promise<void> {
+  const plugin = app.plugins.getByKey(name) as XplanPlugin;
   const layer = new WMSLayer({
     name: `${plan.getId()}_2d`,
     url: plan[xplanFeatureTypeSymbol].wmsUrl,
@@ -291,7 +292,7 @@ export async function addPlan2dLayer(
     },
     properties: {
       featureInfo: featureInfos.plan2d.name,
-      title: plan.get('name'),
+      title: plan.get(plugin.config.bpPlanListAttribute),
     },
     zIndex,
   }) as Xplan2dLayer;
@@ -349,7 +350,7 @@ export async function addPlan3dLayer(
         app.notifier.add({
           message: 'xplan.administration.error.noBaugebiet',
           type: NotificationType.INFO,
-          title: plan.get('name'),
+          title: plan.get(plugin.config.bpPlanListAttribute),
         });
       },
     },

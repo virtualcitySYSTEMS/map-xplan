@@ -148,7 +148,7 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
                           },
                         ),
                         type: NotificationType.ERROR,
-                        title: plan.get('name'),
+                        title: plan.get(config.bpPlanListAttribute),
                       });
                     },
                     onErrorReadingFeatures() {
