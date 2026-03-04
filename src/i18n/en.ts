@@ -61,7 +61,6 @@ export default {
       activateAll2d: 'Activate all B-Plans',
       activateAll3d: 'Activate all 3D building sites',
       hideExistingBuildings: 'Hide existing buildings',
-      hideAllExistingBuildings: 'Hide all existing buildings',
       exportAll3d: 'Export all 3D building sites',
       export3d: 'Export 3D building site',
       styleAll3d: 'Style all 3D building sites',

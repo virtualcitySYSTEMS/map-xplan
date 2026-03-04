@@ -61,7 +61,6 @@ export default {
       activateAll2d: 'Alle B-Pläne aktivieren',
       activateAll3d: 'Alle 3D-Baufenster aktivieren',
       hideExistingBuildings: 'Bestehende Gebäude ausblenden',
-      hideAllExistingBuildings: 'Alle bestehenden Gebäude ausblenden',
       exportAll3d: 'Alle 3D-Baufenster exportieren',
       export3d: '3D-Baufenster exportieren',
       styleAll3d: 'Stil für alle 3D-Baufenster auswählen',

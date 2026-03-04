@@ -27,6 +27,8 @@ Unterstützte XPlanung-Versionen:
   Die 3D-Darstellung beschränkt sich auf die Baufenster.
 - **Ausblenden von Bestandsgebäuden**: In der 3D-Karte können Bestandsgebäude für einzelne Pläne ausgeblendet werden.
 
+> **Hinweis**: Das gleichzeitige Ausblenden von Bestandsgebäuden für viele Pläne (ca. 10–15+) kann die Grafikkarte überlasten und zum Abstürzen der 3D-Karte führen. Diese Funktion daher sparsam einsetzen und nicht für zu viele Pläne gleichzeitig aktivieren.
+
 ## Konfiguration
 
 | Option              | Typ                                      | Default                             | Beschreibung                                                                                                                                                                                                                      |

@@ -1,3 +1,8 @@
+# v1.0.3
+
+- add hint regarding limitations of clipping polygons (Bestandsgebäude ausblenden) to README
+- remove batch clipping button (Hide all existing buildings)
+
 # v1.0.2
 
 - fix bug where not always the configured bpPlanListAttribute was displayed

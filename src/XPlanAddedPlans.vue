@@ -158,30 +158,9 @@
           }
         },
       }),
-      clipping: reactive<VcsAction>({
-        name: 'xplan.bplans.hideAllExistingBuildings',
-        title: 'xplan.bplans.hideAllExistingBuildings',
-        icon: 'mdi-home-off',
-        active: false,
-        callback(): void {
-          const plans = [
-            ...plugin.addedPlansCollectionManager.get(service)!.collection,
-          ] as Plan[];
-          if (this.active) {
-            plans.forEach((p) => {
-              removeClippingPolygons(p);
-            });
-          } else {
-            plans.forEach((p) => {
-              addClippingPolygons(p);
-            });
-          }
-        },
-      }),
       styleAll3d: reactive<VcsAction>({
         name: 'xplan.bplans.styleAll3d',
         title: 'xplan.bplans.styleAll3d',
-        icon: 'mdi-palette-swatch-variant',
         callback(): void {
           isStyleDialogOpen.value = service as XplanBoxService;
         },
@@ -211,19 +190,7 @@
       nodeActions[index].styleAll3d.disabled = !serviceHas3dLayer;
     });
   }
-  function updateNodeClipppingAction(): void {
-    plugin.addedPlansCollectionManager?.componentIds.forEach((id, index) => {
-      nodeActions[index].clipping.active = (
-        [...plugin.addedPlansCollectionManager.get(id)!.collection] as Plan[]
-      ).every((plan) =>
-        [...app.clippingPolygons].some((polygon) =>
-          polygon.name.includes(String(plan.getId())),
-        ),
-      );
-    });
-  }
   updateNodeLayerActions();
-  updateNodeClipppingAction();
 
   plugin.addedPlansCollectionManager?.componentIds.forEach((id, index) => {
     const nodeItem = new NodeContentTreeItem(
@@ -379,7 +346,6 @@
         collection.added.addEventListener((plan) => {
           addPlanToContentTree(plan, service);
           updateNodeLayerActions();
-          updateNodeClipppingAction();
         }),
         collection.removed.addEventListener((plan) => {
           const items = [...contentTree].filter((item) =>
@@ -392,7 +358,6 @@
             hideBuildingsDestroyCallbacks.get(plan.getId()!)?.();
             hideBuildingsDestroyCallbacks.delete(plan.getId()!);
             updateNodeLayerActions();
-            updateNodeClipppingAction();
           }
         }),
       ];
@@ -410,12 +375,6 @@
       if (isXplan2dLayer(layer) || isXplan3dLayer(layer)) {
         updateNodeLayerActions();
       }
-    }),
-    app.clippingPolygons.added.addEventListener(() => {
-      updateNodeClipppingAction();
-    }),
-    app.clippingPolygons.removed.addEventListener(() => {
-      updateNodeClipppingAction();
     }),
   ];
 
