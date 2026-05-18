@@ -1,3 +1,7 @@
+# v2.0.0
+
+- update @vcmap/ui and @vcmap/core to v6.3
+
 # v1.0.3
 
 - add hint regarding limitations of clipping polygons (Bestandsgebäude ausblenden) to README

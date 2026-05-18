@@ -48,7 +48,7 @@ class PlanIframeWmsFeatureInfoView extends AbstractFeatureInfoView {
     if (position.position) {
       let wmsFeatureProvider: WMSFeatureProvider | undefined;
       if (xplanFeatureTypeSymbol in featureInfo.feature) {
-        wmsFeatureProvider = new WMSFeatureProvider(layer.name, {
+        wmsFeatureProvider = new WMSFeatureProvider({
           url: (featureInfo.feature as Plan)[xplanFeatureTypeSymbol].wmsUrl,
           responseType: 'text/html',
           featureInfoFormat: 'WMSGetFeatureInfo',
