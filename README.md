@@ -31,17 +31,19 @@ Unterstützte XPlanung-Versionen:
 
 ## Konfiguration
 
-| Option              | Typ                                      | Default                             | Beschreibung                                                                                                                                                                                                                      |
-| ------------------- | ---------------------------------------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| projection          | `ProjectionOptions`                      | [siehe unten](#projectionoptions)   | Koordinatenreferenzsystem des Backends                                                                                                                                                                                            |
-| bpPlanListAttribute | `'name' \| 'nummer'`                     | `'name'`                            | Attribut, nach dem die B-Pläne in der Übersicht sortiert und angezeigt werden                                                                                                                                                     |
-| xplanBoxUrl         | `string`                                 | `''`                                | URL zum XPlanBox-Backend. **Erforderlich**.                                                                                                                                                                                       |
-| xplanBoxServices    | `Array<'pre' \| 'current' \| 'archive'>` | `['pre', 'current']`                | Liste der zu verwendenden XPlanBox-Services (pre = Vorentwurf, current = aktuell, archive = archiviert). Reihenfolge beeinflusst Zeichenreihenfolge der Layer und Reihenfolge der Listen in 'Übersicht' und 'Hinzugefügte Pläne'. |
-| filterInitiallyOpen | `boolean`                                | `true`                              | Gibt an, ob das Filterfenster beim initialen Aktivieren des Plugins geöffnet ist                                                                                                                                                  |
-| additionalStyles3d  | `string[]`                               | `[]`                                | Liste zusätzlicher Styles, die für die Darstellung der Baufenster zur Verfügung stehen. Müssen in der app config konfiguriert und hier anhand des Namens verlinkt werden.                                                         |
-| defaultStyle3d      | `Style3dOptions`                         | [siehe unten](#style3doptions)      | Name des Standard-3D-Styles für die Darstellung der Baufenster, pro Service                                                                                                                                                       |
-| cubeCreationOptions | `CubeCreationOptions`                    | [siehe unten](#cubecreationoptions) | Optionen für die Erstellung der 3D-Baufenster                                                                                                                                                                                     |
-| minZIndex           | `number`                                 | `10`                                | Minimaler z-Index für die Darstellung der 2D-WMS-Layer.                                                                                                                                                                           |
+| Option              | Typ                                      | Default                           | Beschreibung                                                                                                                                                                                                                      |
+| ------------------- | ---------------------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| projection          | `ProjectionOptions`                      | [siehe unten](#projectionoptions) | Koordinatenreferenzsystem des Backends                                                                                                                                                                                            |
+| bpPlanListAttribute | `'name' \| 'nummer'`                     | `'name'`                          | Attribut, nach dem die B-Pläne in der Übersicht sortiert und angezeigt werden                                                                                                                                                     |
+| xplanBoxUrl         | `string`                                 | `''`                              | URL zum XPlanBox-Backend. **Erforderlich**.                                                                                                                                                                                       |
+| xplanBoxServices    | `Array<'pre' \| 'current' \| 'archive'>` | `['pre', 'current']`              | Liste der zu verwendenden XPlanBox-Services (pre = Vorentwurf, current = aktuell, archive = archiviert). Reihenfolge beeinflusst Zeichenreihenfolge der Layer und Reihenfolge der Listen in 'Übersicht' und 'Hinzugefügte Pläne'. |
+| filterInitiallyOpen | `boolean`                                | `true`                            | Gibt an, ob das Filterfenster beim initialen Aktivieren des Plugins geöffnet ist                                                                                                                                                  |
+| additionalStyles3d  | `string[]`                               | `[]`                              | Liste zusätzlicher Styles, die für die Darstellung der Baufenster zur Verfügung stehen. Müssen in der app config konfiguriert und hier anhand des Namens verlinkt werden.                                                         |
+| defaultStyle3d      | `Style3dOptions`                         | [siehe unten](#style3doptions)    | Name des Standard-3D-Styles für die Darstellung der Baufenster, pro Service                                                                                                                                                       |
+
+| cubeCreationOptions | `CubeCreationOptions` | [siehe unten](#cubecreationoptions) | Optionen für die Erstellung der 3D-Baufenster |
+| vegetationCreationOptions | `Array<`[VegetationCreationOptions](#vegetationcreationoptions)`>` | `[]` | Optionen für die Erstellung der 3D-Vegetationsobjekte. Für jeden Gegenstand kann ein 3D-Modell konfiguriert werden. Unterstützt werden nur Punktobjekte. |
+| minZIndex | `number` | `10` | Minimaler z-Index für die Darstellung der 2D-WMS-Layer. |
 
 ### ProjectionOptions
 
@@ -109,3 +111,17 @@ Verfügbare Relationen:
 - `height`: Absolute Höhe
 - `groundFloor`: Relativ zum Erdgeschoss
 - `terrain`: Relativ zum Gelände
+
+### VegetationCreationOptions
+
+| Option      | Typ                                 | Beschreibung                                                                                                  |
+| ----------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| gegenstand  | `Gegenstand`                        | Art der Vegetation (siehe unten)                                                                              |
+| modelUrl    | `string`                            | URL zum 3D-Modell, das für diesen Gegenstand verwendet werden soll                                            |
+| rechtsstand | `Array<'1000' \| '2000' \| '3000'>` | Rechtsstandwerte, für die dieses Modell angezeigt wird (1000 = Geplant, 2000 = Bestehend, 3000 = Fortfallend) |
+
+Unterstützte `Gegenstand`-Werte:
+
+- `1000`: Bäume
+- `1100`: Kopfbäume
+- `2000`: Sträucher

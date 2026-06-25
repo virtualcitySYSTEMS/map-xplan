@@ -27,6 +27,7 @@
     getAllCubeStyles,
   } from '../cubeStyles.js';
   import PriorityList from './PriorityList.vue';
+  import VegetationSettings from './VegetationSettings.vue';
 
   const app = inject<VcsUiApp>('vcsApp')!;
 
@@ -272,6 +273,7 @@
         </v-row>
       </v-container>
     </VcsFormSection>
+    <VegetationSettings v-model="localConfig.vegetationCreationOptions" />
     <VcsFormSection heading="xplan.editor.extendedSettings3d" expandable>
       <v-container class="px-1 py-0">
         <v-row no-gutters>

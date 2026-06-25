@@ -210,6 +210,34 @@ export type CubeCreationOptions = {
   terrainLevelMethod: TerrainLevelMethod;
 };
 
+export const GEGENSTAND_VALUES = ['1000', '1100', '2000'] as const;
+export type Gegenstand = (typeof GEGENSTAND_VALUES)[number];
+export const GEGENSTAND_NAME: Record<Gegenstand, string> = {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '1000': 'Bäume',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '1100': 'Kopfbäume',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '2000': 'Sträucher',
+};
+export const XP_RECHTSSTAND_VALUES = ['EMPTY', '1000', '2000', '3000'] as const;
+export type XpRechtsstand = (typeof XP_RECHTSSTAND_VALUES)[number];
+export const XP_RECHTSSTAND_NAME: Record<XpRechtsstand, string> = {
+  EMPTY: 'Keine Angabe',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '1000': 'Geplant',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '2000': 'Bestehend',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  '3000': 'Fortfallend',
+};
+
+export type VegetationCreationOptions = {
+  gegenstand: Gegenstand;
+  modelUrl?: string;
+  rechtsstand: XpRechtsstand[];
+};
+
 export function getDefaultCubeCreationOptions(): CubeCreationOptions {
   return {
     storeyAttributePriority: [...DEFAULT_STOREY_ATTRIBUTE_PRIORITY],
@@ -236,6 +264,7 @@ export type XplanConfig = {
   xplanBoxServices: XplanBoxService[];
   filterInitiallyOpen: boolean;
   cubeCreationOptions: CubeCreationOptions;
+  vegetationCreationOptions: VegetationCreationOptions[];
   minZIndex: number;
 };
 
@@ -256,6 +285,12 @@ export default function getDefaultOptions(): XplanConfig {
       archive: defaultStyles.archive.name!,
     },
     cubeCreationOptions: getDefaultCubeCreationOptions(),
+    vegetationCreationOptions: [
+      {
+        gegenstand: '1000',
+        rechtsstand: ['EMPTY', '1000', '2000'],
+      },
+    ],
     minZIndex: 10,
   };
 }

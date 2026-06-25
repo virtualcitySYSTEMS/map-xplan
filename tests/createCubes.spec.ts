@@ -23,7 +23,7 @@ import {
   type Hoehenbezug,
 } from '../src/defaultOptions.js';
 import {
-  loadCubes,
+  load3dFeatures,
   type Plan,
   XPLAN_NS,
   xplanFeatureTypeSymbol,
@@ -195,7 +195,7 @@ describe('creating cubes', () => {
     });
 
     it('should correctly split up into differing UGF, even if they intersect BTF', async () => {
-      const features = await loadCubes(
+      const { cubes: features } = await load3dFeatures(
         plan,
         terrainProvider,
         projection,
@@ -235,7 +235,7 @@ describe('creating cubes', () => {
         });
 
         it('should determine ground level from terrain and create a relative height', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -282,7 +282,7 @@ describe('creating cubes', () => {
         });
 
         it('should correctly determine ground level from terrain and use the height as is', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -324,7 +324,7 @@ describe('creating cubes', () => {
         });
 
         it('should correctly assume the one with the higher priorety', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -364,7 +364,7 @@ describe('creating cubes', () => {
         });
 
         it('should work as BTF', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -407,7 +407,7 @@ describe('creating cubes', () => {
         });
 
         it('should correctly use hmax', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -442,7 +442,7 @@ describe('creating cubes', () => {
         });
 
         it('should assume its a relative height', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -483,7 +483,7 @@ describe('creating cubes', () => {
         });
 
         it('should directly use as ground level', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -524,7 +524,7 @@ describe('creating cubes', () => {
         });
 
         it('should correctly elevate the ground level', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -564,7 +564,7 @@ describe('creating cubes', () => {
         });
 
         it('should use the correct one based on priority', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -602,7 +602,7 @@ describe('creating cubes', () => {
         });
 
         it('should work as with BTF', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -643,7 +643,7 @@ describe('creating cubes', () => {
         });
 
         it('should use hmax as expected', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -682,7 +682,7 @@ describe('creating cubes', () => {
         });
 
         it('should directly assume as ground level if no other level is given and correctly create a skirt', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -723,7 +723,7 @@ describe('creating cubes', () => {
         });
 
         it('should ignoring relative terrain height', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -767,7 +767,7 @@ describe('creating cubes', () => {
         });
 
         it('should assume ground level, correctly deduct from height to create a relative height and skirt', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -809,7 +809,7 @@ describe('creating cubes', () => {
         });
 
         it('should correclty reduce the given height, add to the terrain level and create a skirt', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -849,7 +849,7 @@ describe('creating cubes', () => {
         });
 
         it('should correctly remove the difference from terrain to ground level', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -889,7 +889,7 @@ describe('creating cubes', () => {
         });
 
         it('should assume ground level, correctly add to the height to create a relative height. there should not be a skirt', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -929,7 +929,7 @@ describe('creating cubes', () => {
         });
 
         it('should add the ground level to the terrain level and remove from the height to create a relative height', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -969,7 +969,7 @@ describe('creating cubes', () => {
         });
 
         it('should assume ground level directly from value & height too', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -1009,7 +1009,7 @@ describe('creating cubes', () => {
         });
 
         it('should correctly add the terrain level to the ground and use height as is', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -1051,7 +1051,7 @@ describe('creating cubes', () => {
         });
 
         it('should always prefer UGF and add the height in both attribute', async () => {
-          const features = await loadCubes(
+          const { cubes: features } = await load3dFeatures(
             plan,
             terrainProvider,
             projection,
@@ -1093,7 +1093,7 @@ describe('creating cubes', () => {
       });
 
       it('should correctly parse the storeys', async () => {
-        const features = await loadCubes(
+        const { cubes: features } = await load3dFeatures(
           plan,
           terrainProvider,
           projection,
@@ -1136,7 +1136,7 @@ describe('creating cubes', () => {
       });
 
       it('should correctly parse the storeys', async () => {
-        const features = await loadCubes(
+        const { cubes: features } = await load3dFeatures(
           plan,
           terrainProvider,
           projection,

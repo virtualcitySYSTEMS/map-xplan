@@ -1,3 +1,7 @@
+# v2.1.0
+
+- add vegetationCreationOptions to define _BP_AnpflanzungBindungErhaltung_ `Gegenstand` values which should be displayed with default or custom tree model together with 3d cubes
+
 # v2.0.0
 
 - update @vcmap/ui and @vcmap/core to v6.3

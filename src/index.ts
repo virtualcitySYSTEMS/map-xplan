@@ -318,6 +318,17 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
         serialized.filterInitiallyOpen = mergedConfig.filterInitiallyOpen;
       }
 
+      if (
+        !equal(
+          mergedConfig.vegetationCreationOptions,
+          defaultOptions.vegetationCreationOptions,
+        )
+      ) {
+        serialized.vegetationCreationOptions = structuredClone(
+          mergedConfig.vegetationCreationOptions,
+        );
+      }
+
       const serializedCubeOptions: Partial<CubeCreationOptions> = {};
       if (
         !equal(

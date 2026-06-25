@@ -22,7 +22,7 @@ import GeoJSONFormat, {
 } from 'ol/format/GeoJSON.js';
 import type { FeatureCollection } from 'geojson';
 import type { Feature } from 'ol';
-import { MultiPolygon, Polygon } from 'ol/geom';
+import { MultiPolygon, Point, Polygon } from 'ol/geom';
 import { is, ofLiteralType } from '@vcsuite/check';
 import { getLogger } from '@vcsuite/logger';
 import { area as getArea } from '@turf/area';
@@ -30,12 +30,19 @@ import { intersect } from '@turf/intersect';
 import { type CesiumTerrainProvider } from '@vcmap-cesium/engine';
 import pgk from '../package.json';
 import { createCubes } from './createCubes.js';
-import type { CubeCreationOptions, PlanArt } from './defaultOptions';
+import type {
+  CubeCreationOptions,
+  Gegenstand,
+  PlanArt,
+  VegetationCreationOptions,
+  XpRechtsstand,
+} from './defaultOptions';
 
 export const xplanFeatureTypeSymbol: unique symbol = Symbol('XplanFeatureType');
 const PLANINHALT_FEATURE_TYPE = [
   'BP_BaugebietsTeilFlaeche',
   'BP_UeberbaubareGrundstuecksFlaeche',
+  'BP_AnpflanzungBindungErhaltung',
 ] as const;
 
 const FEATURE_TYPE = [...PLANINHALT_FEATURE_TYPE, 'BP_Plan'] as const;
@@ -49,7 +56,7 @@ export const XPLAN_BOX_SERVICES = ['pre', 'current', 'archive'] as const;
 export type XplanBoxService = (typeof XPLAN_BOX_SERVICES)[number];
 
 export type PlanAPI = {
-  type: (typeof FEATURE_TYPE)[2];
+  type: (typeof FEATURE_TYPE)[3];
   xplanVersion: (typeof SUPPORTED_XPLAN_VERSIONS)[number];
   getByIdUrl: string;
   wmsUrl: string;
@@ -540,13 +547,139 @@ function intersectGrundstuecke(
   return intersections;
 }
 
-export async function loadCubes(
-  plan: Plan,
+async function loadCubes(
+  additionalObject: Element,
+  xplanVersion: XplanVersion,
   terrainProvider: CesiumTerrainProvider,
   dataProjection: Projection,
   options: CubeCreationOptions,
   hooks?: { onUnassignedGrundstuecke?: () => void },
 ): Promise<Feature<Polygon | MultiPolygon>[]> {
+  const baugebiete = getWFSFormat(xplanVersion, 'BP_BaugebietsTeilFlaeche')
+    .readFeatures(additionalObject.children[0], {
+      dataProjection: dataProjection.proj,
+      featureProjection: mercatorProjection.proj,
+    })
+    .map((feature) => {
+      const geometry = feature.getGeometry();
+      const geometryType = geometry?.getType();
+      if (geometryType !== 'Polygon' && geometryType !== 'MultiPolygon') {
+        getLogger(pgk.name).error(
+          'Invalid geometry type for Baugebiet:',
+          geometryType,
+        );
+        return undefined;
+      }
+      const baugebiet: Planinhalt<'BP_BaugebietsTeilFlaeche'> = {
+        type: 'BP_BaugebietsTeilFlaeche',
+        feature: feature as Feature<Polygon>,
+      };
+      return baugebiet;
+    })
+    .filter((f) => !!f);
+
+  const grundstuecke = getWFSFormat(
+    xplanVersion,
+    'BP_UeberbaubareGrundstuecksFlaeche',
+  )
+    .readFeatures(additionalObject.children[0], {
+      dataProjection: dataProjection.proj,
+      featureProjection: mercatorProjection.proj,
+    })
+    .map((feature) => {
+      const geometry = feature.getGeometry();
+      const geometryType = geometry?.getType();
+      if (geometryType !== 'Polygon' && geometryType !== 'MultiPolygon') {
+        return undefined;
+      }
+      const grundstueck: Planinhalt<'BP_UeberbaubareGrundstuecksFlaeche'> = {
+        type: 'BP_UeberbaubareGrundstuecksFlaeche',
+        feature: feature as Feature<Polygon>,
+      };
+      return grundstueck;
+    })
+    .filter((f) => !!f);
+
+  const intersections = intersectGrundstuecke(baugebiete, grundstuecke);
+
+  if (grundstuecke.length && !intersections.length) {
+    hooks?.onUnassignedGrundstuecke?.();
+  }
+  return Promise.all(
+    intersections.map((intersection) =>
+      createCubes(intersection, terrainProvider, options),
+    ),
+  );
+}
+
+function loadVegetation(
+  additionalObject: Element,
+  xplanVersion: XplanVersion,
+  dataProjection: Projection,
+  options: VegetationCreationOptions[],
+  defaultVegetationModelUrl?: string,
+): Feature<Point>[] {
+  const optionsByGegenstand = new Map<Gegenstand, VegetationCreationOptions>();
+  options.forEach((option) => {
+    if (!optionsByGegenstand.has(option.gegenstand)) {
+      optionsByGegenstand.set(option.gegenstand, option);
+    }
+  });
+
+  return getWFSFormat(xplanVersion, 'BP_AnpflanzungBindungErhaltung')
+    .readFeatures(additionalObject.children[0], {
+      dataProjection: dataProjection.proj,
+      featureProjection: mercatorProjection.proj,
+    })
+    .filter((f): f is Feature<Point> => {
+      if (!(f.getGeometry() instanceof Point)) {
+        return false;
+      }
+      const gegenstandValue = f.get('gegenstand') as
+        | undefined
+        | Gegenstand
+        | Gegenstand[];
+      const gegenstaende = Array.isArray(gegenstandValue)
+        ? gegenstandValue
+        : [gegenstandValue];
+      const matchingGegenstand = gegenstaende
+        .filter((g): g is Gegenstand => g != null && optionsByGegenstand.has(g))
+        // use the one with smallest number: "Baeume" (1000) >> "Straeucher" (2000)
+        .sort()[0];
+      if (!matchingGegenstand) {
+        return false;
+      }
+      const option = optionsByGegenstand.get(matchingGegenstand)!;
+
+      const rechtsstand = (f.get('rechtsstand') || 'EMPTY') as XpRechtsstand;
+      if (!option.rechtsstand.includes(rechtsstand)) {
+        return false;
+      }
+
+      const modelUrl = option.modelUrl ?? defaultVegetationModelUrl;
+      if (modelUrl) {
+        f.set('olcs_modelUrl', modelUrl);
+      }
+      return true;
+    });
+}
+
+export async function load3dFeatures(
+  plan: Plan,
+  terrainProvider: CesiumTerrainProvider,
+  dataProjection: Projection,
+  cubeOptions: CubeCreationOptions,
+  vegetationOptions?: VegetationCreationOptions[],
+  defaultVegetationModelUrl?: string,
+  hooks?: { onUnassignedGrundstuecke?: () => void },
+): Promise<{
+  cubes: Feature<Polygon | MultiPolygon>[];
+  vegetation: Feature<Point>[];
+}> {
+  const resultFeatures: {
+    cubes: Feature<Polygon | MultiPolygon>[];
+    vegetation: Feature<Point>[];
+  } = { cubes: [], vegetation: [] };
   const planXMLString = await (
     await fetch(plan[xplanFeatureTypeSymbol].getByIdUrl)
   ).text();
@@ -554,72 +687,34 @@ export async function loadCubes(
     planXMLString,
     'application/xml',
   );
-
   const additionalObject = planXML.getElementsByTagNameNS(
     WFS_20_NS,
     'additionalObjects',
   );
+  if (!additionalObject[0]) {
+    return resultFeatures;
+  }
+  const { xplanVersion } = plan[xplanFeatureTypeSymbol];
 
-  if (additionalObject) {
-    const baugebiete = getWFSFormat(
-      plan[xplanFeatureTypeSymbol].xplanVersion,
-      'BP_BaugebietsTeilFlaeche',
-    )
-      .readFeatures(additionalObject[0].children[0], {
-        dataProjection: dataProjection.proj,
-        featureProjection: mercatorProjection.proj,
-      })
-      .map((feature) => {
-        const geometry = feature.getGeometry();
-        const geometryType = geometry?.getType();
-        if (geometryType !== 'Polygon' && geometryType !== 'MultiPolygon') {
-          getLogger(pgk.name).error(
-            'Invalid geometry type for Baugebiet:',
-            geometryType,
-          );
-          return undefined;
-        }
-        const baugebiet: Planinhalt<'BP_BaugebietsTeilFlaeche'> = {
-          type: 'BP_BaugebietsTeilFlaeche',
-          feature: feature as Feature<Polygon>,
-        };
-        return baugebiet;
-      })
-      .filter((f) => !!f);
+  resultFeatures.cubes = await loadCubes(
+    additionalObject[0],
+    xplanVersion,
+    terrainProvider,
+    dataProjection,
+    cubeOptions,
+    hooks,
+  );
 
-    const grundstuecke = getWFSFormat(
-      plan[xplanFeatureTypeSymbol].xplanVersion,
-      'BP_UeberbaubareGrundstuecksFlaeche',
-    )
-      .readFeatures(additionalObject[0].children[0], {
-        dataProjection: dataProjection.proj,
-        featureProjection: mercatorProjection.proj,
-      })
-      .map((feature) => {
-        const geometry = feature.getGeometry();
-        const geometryType = geometry?.getType();
-        if (geometryType !== 'Polygon' && geometryType !== 'MultiPolygon') {
-          return undefined;
-        }
-        const grundstueck: Planinhalt<'BP_UeberbaubareGrundstuecksFlaeche'> = {
-          type: 'BP_UeberbaubareGrundstuecksFlaeche',
-          feature: feature as Feature<Polygon>,
-        };
-        return grundstueck;
-      })
-      .filter((f) => !!f);
-
-    const features = intersectGrundstuecke(baugebiete, grundstuecke);
-
-    if (grundstuecke.length && !features.length) {
-      hooks?.onUnassignedGrundstuecke?.();
-    }
-    return Promise.all(
-      features.map((intersection) =>
-        createCubes(intersection, terrainProvider, options),
-      ),
+  if (vegetationOptions?.length) {
+    const vegetation = loadVegetation(
+      additionalObject[0],
+      xplanVersion,
+      dataProjection,
+      vegetationOptions,
+      defaultVegetationModelUrl,
     );
+    resultFeatures.vegetation = vegetation;
   }
 
-  return [];
+  return resultFeatures;
 }

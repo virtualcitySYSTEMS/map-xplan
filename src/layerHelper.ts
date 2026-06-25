@@ -12,6 +12,7 @@ import {
 } from '@vcmap/core';
 import { type CesiumTerrainProvider } from '@vcmap-cesium/engine';
 import {
+  getPluginAssetUrl,
   NotificationType,
   type FeatureInfoViewOptions,
   type FillLegendRow,
@@ -19,10 +20,10 @@ import {
   type VcsUiApp,
 } from '@vcmap/ui';
 import {
-  loadCubes,
   type Plan,
   type XplanBoxService,
   xplanFeatureTypeSymbol,
+  load3dFeatures,
 } from './xplanAPI.js';
 import type { XplanPlugin } from './index.js';
 import { name } from '../package.json';
@@ -340,11 +341,19 @@ export async function addPlan3dLayer(
     throw new Error('No active terrain provider in the CesiumMap');
   }
 
-  const features = await loadCubes(
+  const defaultVegetationModelUrl =
+    getPluginAssetUrl(
+      app,
+      name,
+      'plugin-assets/Tilia_tomentosa__Middle-aged-Lollipop.glb',
+    ) || undefined;
+  const { cubes, vegetation } = await load3dFeatures(
     plan,
     activeTerrainProvider as CesiumTerrainProvider,
     plugin.projection,
     plugin.cubeCreationOptions,
+    plugin.config.vegetationCreationOptions,
+    defaultVegetationModelUrl,
     {
       onUnassignedGrundstuecke() {
         app.notifier.add({
@@ -356,7 +365,7 @@ export async function addPlan3dLayer(
     },
   );
 
-  if (features.length) {
+  if (cubes.length || vegetation.length) {
     const { additionalStyles3d, defaultStyle3d } = plugin.config;
     const layer = new VectorLayer({
       projection: mercatorProjection.toJSON(),
@@ -375,10 +384,11 @@ export async function addPlan3dLayer(
     layer[xplanBPlanSymbol] = plan;
     layer[xplanServiceSymbol] = service;
     app.layers.add(layer);
-    features.forEach((f) => {
+    cubes.forEach((f) => {
       f.set('title', 'xplan.bplans.plan3d');
     });
-    layer.addFeatures(features);
+    layer.addFeatures(cubes);
+    layer.addFeatures(vegetation);
   }
 }
 
@@ -395,6 +405,6 @@ export function isXplan3dLayer(layer: Layer): layer is Xplan3dLayer {
   return (
     xplanBPlanSymbol in layer &&
     xplanServiceSymbol in layer &&
-    layer.name.includes('_3d')
+    layer.name.endsWith('_3d')
   );
 }
