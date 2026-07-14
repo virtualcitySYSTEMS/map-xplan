@@ -55,6 +55,10 @@ export const XPLAN_BOX_SERVICES = ['pre', 'current', 'archive'] as const;
 
 export type XplanBoxService = (typeof XPLAN_BOX_SERVICES)[number];
 
+export const SUPPORTED_XPLAN_BOX_VERSIONS = [7, 8, 9] as const;
+
+export type XplanBoxVersion = (typeof SUPPORTED_XPLAN_BOX_VERSIONS)[number];
+
 export type PlanAPI = {
   type: (typeof FEATURE_TYPE)[3];
   xplanVersion: (typeof SUPPORTED_XPLAN_VERSIONS)[number];

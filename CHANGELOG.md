@@ -1,6 +1,8 @@
 # v2.1.0
 
 - add vegetationCreationOptions to define _BP_AnpflanzungBindungErhaltung_ `Gegenstand` values which should be displayed with default or custom tree model together with 3d cubes
+- add `xplanBoxVersion` config option to support XPlanBox versions 7-9; query `bp_objekte` instead of `BP_Planvektor` for backend versions >= 8
+- fix serialization of `minZIndex` in toJSON
 
 # v2.0.0
 

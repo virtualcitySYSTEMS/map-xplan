@@ -20,7 +20,10 @@
     getMergedConfig,
     TERRAIN_LEVEL_METHOD_VALUES,
   } from '../defaultOptions.js';
-  import { XPLAN_BOX_SERVICES } from '../xplanAPI.js';
+  import {
+    XPLAN_BOX_SERVICES,
+    SUPPORTED_XPLAN_BOX_VERSIONS,
+  } from '../xplanAPI.js';
   import {
     predefinedStyles,
     defaultStyles,
@@ -125,6 +128,22 @@
               id="xplan-editor-backend"
               :model-value="'xPlanBox'"
               :items="['xPlanBox']"
+            />
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col>
+            <VcsLabel html-for="xplan-editor-backend-version" required>
+              {{ $st('xplan.editor.backendVersion') }}
+            </VcsLabel>
+          </v-col>
+          <v-col>
+            <VcsSelect
+              id="xplan-editor-backend-version"
+              v-model="localConfig.xplanBoxVersion"
+              :items="SUPPORTED_XPLAN_BOX_VERSIONS"
+              :rules="[requiredRule]"
+              :placeholder="$st('xplan.editor.backendVersionPlaceholder')"
             />
           </v-col>
         </v-row>

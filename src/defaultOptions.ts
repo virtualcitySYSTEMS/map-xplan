@@ -1,5 +1,5 @@
 import type { ProjectionOptions } from '@vcmap/core';
-import type { PlanQuery, XplanBoxService } from './xplanAPI';
+import type { PlanQuery, XplanBoxService, XplanBoxVersion } from './xplanAPI';
 import { defaultStyles } from './cubeStyles.js';
 
 export const xplanWindowId = 'xplan-window-id';
@@ -261,6 +261,7 @@ export type XplanConfig = {
   additionalStyles3d: string[];
   defaultStyle3d: Style3dOptions;
   xplanBoxUrl: string;
+  xplanBoxVersion: XplanBoxVersion;
   xplanBoxServices: XplanBoxService[];
   filterInitiallyOpen: boolean;
   cubeCreationOptions: CubeCreationOptions;
@@ -276,6 +277,7 @@ export default function getDefaultOptions(): XplanConfig {
     },
     bpPlanListAttribute: BPPlanListAttribute.NAME,
     xplanBoxUrl: '',
+    xplanBoxVersion: 7,
     xplanBoxServices: ['pre', 'current'],
     filterInitiallyOpen: true,
     additionalStyles3d: [],

@@ -22,6 +22,7 @@ import {
 import {
   type Plan,
   type XplanBoxService,
+  type XplanBoxVersion,
   xplanFeatureTypeSymbol,
   load3dFeatures,
 } from './xplanAPI.js';
@@ -109,135 +110,160 @@ export const featureInfoClassMap = new Map<
   [CubeFeatureInfoView.className, CubeFeatureInfoView],
 ]);
 
-export const featureInfos = {
-  plan: {
-    type: PlanIframeWmsFeatureInfoView.className,
-    name: 'xplan-planIframeWms',
-    parameters: { QUERY_LAYERS: 'bp_plan', LAYERS: 'bp_plan' },
-    window: {
-      state: {
-        headerTitle: 'xplan.bplans.featureInfoTitle',
+export const planFeatureInfoName = 'xplan-planIframeWms';
+export const plan2dFeatureInfoName = 'xplan-iframeWms_plan2d';
+export const plan3dFeatureInfoName = 'xplan-cube-feature-info';
+
+/**
+ * Determines the WMS/WFS layer name that holds the plan content (Planvektor)
+ * for a given XPlanBox backend version. Version 8 introduced a breaking
+ * change renaming this layer from `BP_Planvektor` to `bp_objekte`.
+ */
+export function getPlanContentLayerName(
+  xplanBoxVersion: XplanBoxVersion,
+): string {
+  return xplanBoxVersion >= 8 ? 'bp_objekte' : 'BP_Planvektor';
+}
+
+export function getFeatureInfos(xplanBoxVersion: XplanBoxVersion): {
+  plan: PlanIframeWmsFeatureInfoViewOptions;
+  plan3d: FeatureInfoViewOptions;
+  plan2d: PlanIframeWmsFeatureInfoViewOptions;
+} {
+  const planContentLayerName = getPlanContentLayerName(xplanBoxVersion);
+  return {
+    plan: {
+      type: PlanIframeWmsFeatureInfoView.className,
+      name: planFeatureInfoName,
+      parameters: { QUERY_LAYERS: 'bp_plan', LAYERS: 'bp_plan' },
+      window: {
+        state: {
+          headerTitle: 'xplan.bplans.featureInfoTitle',
+        },
+        position: {
+          height: '100%',
+          maxHeight: '100%',
+          width: '30%',
+          maxWidth: '30%',
+        },
       },
-      position: {
-        height: '100%',
-        maxHeight: '100%',
-        width: '30%',
-        maxWidth: '30%',
+    } satisfies PlanIframeWmsFeatureInfoViewOptions,
+    plan3d: {
+      type: CubeFeatureInfoView.className,
+      name: plan3dFeatureInfoName,
+      attributeKeys: [
+        ...CALCULATED_HEIGHT_ATTRIBUTES,
+        ...ADDITIONAL_ATTRIBUTES,
+      ],
+      valueMapping: {
+        heightBezugspunkt: BEZUGSPUNKT_NAME,
+        groundBezugspunkt: BEZUGSPUNKT_NAME,
+        heightHoehenbezug: HOEHENBEZUG_NAME,
+        groundHoehenbezug: HOEHENBEZUG_NAME,
+        allgArtDerBaulNutzung: {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1000: 'Wohnbaufläche',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          2000: 'Gemischte Baufläche',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          3000: 'Gewerbliche Baufläche',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          4000: 'Sonderbaufläche',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          9999: 'Sonstige Baufläche',
+        },
+        besondereArtDerBaulNutzung: {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1000: 'Kleinsiedlungsgebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1100: 'Reines Wohngebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1200: 'Allgemeines Wohngebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1300: 'Besonderes Wohngebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1400: 'Dorfgebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1450: 'Dörfliches Wohngebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1500: 'Mischgebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1550: 'Urbanes Gebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1600: 'Kerngebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1700: 'Gewerbegebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1800: 'Industriegebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          2000: 'Sondergebiet Erholung',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          2100: 'Sonstiges Sondergebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          3000: 'Wochenendhausgebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          4000: 'Sondergebiet',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          9999: 'Sonstiges Gebiet',
+        },
+        bauweise: {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1000: 'Offene Bauweise',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          2000: 'Geschlossene Bauweise',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          3000: 'Abweichende Bauweise',
+        },
+        bebauungsArt: {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          1000: 'Einzelhäuser',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          2000: 'Doppelhäuser',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          3000: 'Hausgruppen',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          4000: 'Einzel- oder Doppelhäuser',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          5000: 'Einzelhäuser oder Hausgruppen',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          6000: 'Doppelhäuser oder Hausgruppen',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          7000: 'Reihenhäuser',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          8000: 'Einzel-, Doppelhäuser und Hausgruppen',
+        },
       },
-    },
-  } satisfies PlanIframeWmsFeatureInfoViewOptions,
-  plan3d: {
-    type: CubeFeatureInfoView.className,
-    name: 'xplan-cube-feature-info',
-    attributeKeys: [...CALCULATED_HEIGHT_ATTRIBUTES, ...ADDITIONAL_ATTRIBUTES],
-    valueMapping: {
-      heightBezugspunkt: BEZUGSPUNKT_NAME,
-      groundBezugspunkt: BEZUGSPUNKT_NAME,
-      heightHoehenbezug: HOEHENBEZUG_NAME,
-      groundHoehenbezug: HOEHENBEZUG_NAME,
-      allgArtDerBaulNutzung: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1000: 'Wohnbaufläche',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        2000: 'Gemischte Baufläche',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        3000: 'Gewerbliche Baufläche',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        4000: 'Sonderbaufläche',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        9999: 'Sonstige Baufläche',
+      window: {
+        state: {
+          headerTitle: 'xplan.bplans.plan3d',
+        },
+        position: {
+          width: '400px',
+        },
       },
-      besondereArtDerBaulNutzung: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1000: 'Kleinsiedlungsgebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1100: 'Reines Wohngebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1200: 'Allgemeines Wohngebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1300: 'Besonderes Wohngebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1400: 'Dorfgebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1450: 'Dörfliches Wohngebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1500: 'Mischgebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1550: 'Urbanes Gebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1600: 'Kerngebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1700: 'Gewerbegebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1800: 'Industriegebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        2000: 'Sondergebiet Erholung',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        2100: 'Sonstiges Sondergebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        3000: 'Wochenendhausgebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        4000: 'Sondergebiet',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        9999: 'Sonstiges Gebiet',
+    } satisfies FeatureInfoViewOptions,
+    plan2d: {
+      type: PlanIframeWmsFeatureInfoView.className,
+      name: plan2dFeatureInfoName,
+      parameters: {
+        FEATURE_COUNT: '100',
+        QUERY_LAYERS: planContentLayerName,
+        LAYERS: planContentLayerName,
       },
-      bauweise: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1000: 'Offene Bauweise',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        2000: 'Geschlossene Bauweise',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        3000: 'Abweichende Bauweise',
+      window: {
+        state: {
+          headerTitle: 'xplan.bplans.featureInfoTitle',
+        },
+        position: {
+          height: '100%',
+          maxHeight: '100%',
+          width: '30%',
+          maxWidth: '30%',
+        },
       },
-      bebauungsArt: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        1000: 'Einzelhäuser',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        2000: 'Doppelhäuser',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        3000: 'Hausgruppen',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        4000: 'Einzel- oder Doppelhäuser',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        5000: 'Einzelhäuser oder Hausgruppen',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        6000: 'Doppelhäuser oder Hausgruppen',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        7000: 'Reihenhäuser',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        8000: 'Einzel-, Doppelhäuser und Hausgruppen',
-      },
-    },
-    window: {
-      state: {
-        headerTitle: 'xplan.bplans.plan3d',
-      },
-      position: {
-        width: '400px',
-      },
-    },
-  } satisfies FeatureInfoViewOptions,
-  plan2d: {
-    type: PlanIframeWmsFeatureInfoView.className,
-    name: 'xplan-iframeWms_plan2d',
-    parameters: {
-      FEATURE_COUNT: '100',
-      QUERY_LAYERS: 'BP_Planvektor',
-      LAYERS: 'BP_Planvektor',
-    },
-    window: {
-      state: {
-        headerTitle: 'xplan.bplans.featureInfoTitle',
-      },
-      position: {
-        height: '100%',
-        maxHeight: '100%',
-        width: '30%',
-        maxWidth: '30%',
-      },
-    },
-  } satisfies PlanIframeWmsFeatureInfoViewOptions,
-};
+    } satisfies PlanIframeWmsFeatureInfoViewOptions,
+  };
+}
 
 export function createPlanLayer(
   service: XplanBoxService,
@@ -247,7 +273,7 @@ export function createPlanLayer(
     projection,
     style: new VectorStyleItem(getDefaultPlanStyle(service)),
     properties: {
-      featureInfo: featureInfos.plan.name,
+      featureInfo: planFeatureInfoName,
       title: 'xplan.bplans.plan2d',
     },
     vectorProperties: {
@@ -277,7 +303,7 @@ export async function addPlan2dLayer(
     name: `${plan.getId()}_2d`,
     url: plan[xplanFeatureTypeSymbol].wmsUrl,
     version: '1.3.0',
-    layers: 'BP_Planvektor',
+    layers: getPlanContentLayerName(plugin.config.xplanBoxVersion),
     parameters: {
       TRANSPARENT: 'true',
       FORMAT: 'image/png',
@@ -292,7 +318,7 @@ export async function addPlan2dLayer(
       },
     },
     properties: {
-      featureInfo: featureInfos.plan2d.name,
+      featureInfo: plan2dFeatureInfoName,
       title: plan.get(plugin.config.bpPlanListAttribute),
     },
     zIndex,
@@ -378,7 +404,7 @@ export async function addPlan3dLayer(
           ...predefinedStyles.map((s) => s.name),
           ...additionalStyles3d,
         ],
-        featureInfo: featureInfos.plan3d.name,
+        featureInfo: plan3dFeatureInfoName,
       },
     }) as Xplan3dLayer;
     layer[xplanBPlanSymbol] = plan;

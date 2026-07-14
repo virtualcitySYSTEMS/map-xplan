@@ -31,7 +31,7 @@ import {
 import {
   createPlanLayer,
   featureInfoClassMap,
-  featureInfos,
+  getFeatureInfos,
 } from './layerHelper.js';
 import { getAllCubeStyles } from './cubeStyles.js';
 import createContextMenu from './createContextMenu.js';
@@ -195,16 +195,20 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
     async initialize(vcsUiApp: VcsUiApp): Promise<void> {
       app = vcsUiApp;
 
-      Object.values(featureInfos).forEach((featureInfo) => {
-        const CTOR = featureInfoClassMap.get(featureInfo.type);
-        if (CTOR) {
-          const instance = new CTOR(featureInfo);
-          markVolatile(instance);
-          app?.featureInfo.add(instance);
-        } else {
-          getLogger(name).error(`Constructor for ${featureInfo.type} missing`);
-        }
-      });
+      Object.values(getFeatureInfos(config.xplanBoxVersion)).forEach(
+        (featureInfo) => {
+          const CTOR = featureInfoClassMap.get(featureInfo.type!);
+          if (CTOR) {
+            const instance = new CTOR(featureInfo);
+            markVolatile(instance);
+            app?.featureInfo.add(instance);
+          } else {
+            getLogger(name).error(
+              `Constructor for ${featureInfo.type} missing`,
+            );
+          }
+        },
+      );
       await app.styles.parseItems(getAllCubeStyles(), volatileModuleId);
 
       await Promise.all(
@@ -228,12 +232,14 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
       removeContextMenu = createContextMenu(app, this);
     },
     destroy(): void {
-      Object.values(featureInfos).forEach((featureInfo) => {
-        const item = app?.featureInfo.getByKey(featureInfo.name);
-        if (item) {
-          app?.featureInfo.remove(item);
-        }
-      });
+      Object.values(getFeatureInfos(config.xplanBoxVersion)).forEach(
+        (featureInfo) => {
+          const item = app?.featureInfo.getByKey(featureInfo.name);
+          if (item) {
+            app?.featureInfo.remove(item);
+          }
+        },
+      );
       removeNavbarButton?.();
       removeContextMenu?.();
       planLayers.forEach((l) => {
@@ -304,6 +310,10 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
 
       if (mergedConfig.xplanBoxUrl) {
         serialized.xplanBoxUrl = mergedConfig.xplanBoxUrl;
+      }
+
+      if (mergedConfig.xplanBoxVersion !== defaultOptions.xplanBoxVersion) {
+        serialized.xplanBoxVersion = mergedConfig.xplanBoxVersion;
       }
 
       if (
@@ -382,6 +392,10 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
       if (Object.keys(serializedCubeOptions).length) {
         serialized.cubeCreationOptions =
           serializedCubeOptions as CubeCreationOptions;
+      }
+
+      if (mergedConfig.minZIndex !== defaultOptions.minZIndex) {
+        serialized.minZIndex = mergedConfig.minZIndex;
       }
 
       return serialized as XplanConfig;

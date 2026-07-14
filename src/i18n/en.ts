@@ -11,6 +11,8 @@ export default {
       listAttribute: 'List attribute',
       filterInitiallyOpen: 'Filter active on startup',
       backend: 'Back end',
+      backendVersion: 'Back end version',
+      backendVersionPlaceholder: 'Select version',
       additionalStyles3d: 'Additional 3D styles',
       additionalStyles3dPlaceholder: 'Select styles',
       defaultStyle3d: 'Default 3D style',
