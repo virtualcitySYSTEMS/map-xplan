@@ -31,15 +31,16 @@ Unterstützte XPlanung-Versionen:
 
 ## Konfiguration
 
-| Option              | Typ                                      | Default                           | Beschreibung                                                                                                                                                                                                                      |
-| ------------------- | ---------------------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| projection          | `ProjectionOptions`                      | [siehe unten](#projectionoptions) | Koordinatenreferenzsystem des Backends                                                                                                                                                                                            |
-| bpPlanListAttribute | `'name' \| 'nummer'`                     | `'name'`                          | Attribut, nach dem die B-Pläne in der Übersicht sortiert und angezeigt werden                                                                                                                                                     |
-| xplanBoxUrl         | `string`                                 | `''`                              | URL zum XPlanBox-Backend. **Erforderlich**.                                                                                                                                                                                       |
-| xplanBoxServices    | `Array<'pre' \| 'current' \| 'archive'>` | `['pre', 'current']`              | Liste der zu verwendenden XPlanBox-Services (pre = Vorentwurf, current = aktuell, archive = archiviert). Reihenfolge beeinflusst Zeichenreihenfolge der Layer und Reihenfolge der Listen in 'Übersicht' und 'Hinzugefügte Pläne'. |
-| filterInitiallyOpen | `boolean`                                | `true`                            | Gibt an, ob das Filterfenster beim initialen Aktivieren des Plugins geöffnet ist                                                                                                                                                  |
-| additionalStyles3d  | `string[]`                               | `[]`                              | Liste zusätzlicher Styles, die für die Darstellung der Baufenster zur Verfügung stehen. Müssen in der app config konfiguriert und hier anhand des Namens verlinkt werden.                                                         |
-| defaultStyle3d      | `Style3dOptions`                         | [siehe unten](#style3doptions)    | Name des Standard-3D-Styles für die Darstellung der Baufenster, pro Service                                                                                                                                                       |
+| Option               | Typ                                      | Default                              | Beschreibung                                                                                                                                                                                                                      |
+| -------------------- | ---------------------------------------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| projection           | `ProjectionOptions`                      | [siehe unten](#projectionoptions)    | Koordinatenreferenzsystem des Backends                                                                                                                                                                                            |
+| bpPlanListAttribute  | `'name' \| 'nummer'`                     | `'name'`                             | Attribut, nach dem die B-Pläne in der Übersicht sortiert und angezeigt werden                                                                                                                                                     |
+| xplanBoxUrl          | `string`                                 | `''`                                 | URL zum XPlanBox-Backend. **Erforderlich**.                                                                                                                                                                                       |
+| xplanBoxServicePaths | `XplanBoxServicePaths`                   | [siehe unten](#xplanboxservicepaths) | Web-Kontextpfade der XPlanBox-Dienste relativ zu `xplanBoxUrl`. Abhängig von der Installation.                                                                                                                                    |
+| xplanBoxServices     | `Array<'pre' \| 'current' \| 'archive'>` | `['pre', 'current']`                 | Liste der zu verwendenden XPlanBox-Services (pre = Vorentwurf, current = aktuell, archive = archiviert). Reihenfolge beeinflusst Zeichenreihenfolge der Layer und Reihenfolge der Listen in 'Übersicht' und 'Hinzugefügte Pläne'. |
+| filterInitiallyOpen  | `boolean`                                | `true`                               | Gibt an, ob das Filterfenster beim initialen Aktivieren des Plugins geöffnet ist                                                                                                                                                  |
+| additionalStyles3d   | `string[]`                               | `[]`                                 | Liste zusätzlicher Styles, die für die Darstellung der Baufenster zur Verfügung stehen. Müssen in der app config konfiguriert und hier anhand des Namens verlinkt werden.                                                         |
+| defaultStyle3d       | `Style3dOptions`                         | [siehe unten](#style3doptions)       | Name des Standard-3D-Styles für die Darstellung der Baufenster, pro Service                                                                                                                                                       |
 
 | cubeCreationOptions | `CubeCreationOptions` | [siehe unten](#cubecreationoptions) | Optionen für die Erstellung der 3D-Baufenster |
 | vegetationCreationOptions | `Array<`[VegetationCreationOptions](#vegetationcreationoptions)`>` | `[]` | Optionen für die Erstellung der 3D-Vegetationsobjekte. Für jeden Gegenstand kann ein 3D-Modell konfiguriert werden. Unterstützt werden nur Punktobjekte. |
@@ -59,6 +60,16 @@ Unterstützte XPlanung-Versionen:
 | pre     | `'xplan-baufeld-InAufstellung'`  | Standard-Stil für Pläne in Aufstellung |
 | current | `'xplan-baufeld-Rechtskraeftig'` | Standard-Stil für rechtskräftige Pläne |
 | archive | `'xplan-baufeld-Archiviert'`     | Standard-Stil für archivierte Pläne    |
+
+### XplanBoxServicePaths
+
+Die Dienst-URLs setzen sich aus `xplanBoxUrl`, dem hier konfigurierten Kontextpfad und dem festen Dienstnamen zusammen, z. B. `<xplanBoxUrl>/<synWfs>/services/xplansynwfs`. Die Standardwerte entsprechen den offiziellen Docker-Images der XPlanBox. Wird die XPlanBox mit den Namen der Webmodule installiert (seit Version 7.2 `xplan-services-*`), müssen die Pfade angepasst werden. Die korrekten Pfade sind z. B. auf der Startseite der XPlanBox verlinkt. Ein Query-String in `xplanBoxUrl` (z. B. `https://proxy.example/xplanbox?key=abc` für Routing-Parameter eines Proxys) bleibt erhalten und wird an alle Dienstanfragen angehängt. Da `xplanBoxUrl` Teil der öffentlichen App-Konfiguration ist, eignet sich das nicht für Secrets (z.B. Authentifizierungsdaten).
+
+| Option | Default          | Alternative (Webmodul-Namen) | Beschreibung                |
+| ------ | ---------------- | ---------------------------- | --------------------------- |
+| synWfs | `'xplansyn-wfs'` | `'xplan-services-wfs-syn'`   | Kontextpfad des XPlanSynWFS |
+| wfs    | `'xplan-wfs'`    | `'xplan-services-wfs'`       | Kontextpfad des XPlanWFS    |
+| wms    | `'xplan-wms'`    | `'xplan-services-wms'`       | Kontextpfad des XPlanWMS    |
 
 ### CubeCreationOptions
 

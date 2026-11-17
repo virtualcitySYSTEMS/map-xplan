@@ -13,6 +13,12 @@ export default {
       backend: 'Back end',
       backendVersion: 'Back end version',
       backendVersionPlaceholder: 'Select version',
+      servicePaths: 'Service paths',
+      servicePathsHelp:
+        'Paths of the services relative to the base URL. Empty fields use the default path. Example:',
+      synWfsPath: 'XPlanSynWFS path',
+      wfsPath: 'XPlanWFS path',
+      wmsPath: 'XPlanWMS path',
       additionalStyles3d: 'Additional 3D styles',
       additionalStyles3dPlaceholder: 'Select styles',
       defaultStyle3d: 'Default 3D style',

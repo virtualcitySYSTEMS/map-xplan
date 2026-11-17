@@ -42,12 +42,13 @@ import {
   type Plan,
   type PlanQuery,
   type XplanBoxService,
+  type XplanBoxServicePaths,
 } from './xplanAPI';
 import ConfigEditor from './configEditor/ConfigEditor.vue';
 import de from './i18n/de.js';
 import en from './i18n/en.js';
 
-type PluginState = Record<never, never>;
+type PluginState = Record<string, never>;
 
 export type XplanPlugin = VcsPlugin<XplanConfig, PluginState> & {
   readonly config: XplanConfig;
@@ -120,6 +121,7 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
           if (collectionComponent) {
             const hits = await getHits(
               config.xplanBoxUrl,
+              config.xplanBoxServicePaths,
               service as XplanBoxService,
               query,
             );
@@ -130,6 +132,7 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
               ): Promise<{ items: Plan[]; total: number }> {
                 const items = await getPlanFeatures(
                   config.xplanBoxUrl,
+                  config.xplanBoxServicePaths,
                   service as XplanBoxService,
                   {
                     ...query,
@@ -314,6 +317,24 @@ export default function xplanPlugin(customConfig: XplanConfig): XplanPlugin {
 
       if (mergedConfig.xplanBoxVersion !== defaultOptions.xplanBoxVersion) {
         serialized.xplanBoxVersion = mergedConfig.xplanBoxVersion;
+      }
+
+      const serializedServicePaths: Partial<XplanBoxServicePaths> = {};
+      (
+        Object.keys(
+          defaultOptions.xplanBoxServicePaths,
+        ) as (keyof XplanBoxServicePaths)[]
+      ).forEach((key) => {
+        if (
+          mergedConfig.xplanBoxServicePaths[key] !==
+          defaultOptions.xplanBoxServicePaths[key]
+        ) {
+          serializedServicePaths[key] = mergedConfig.xplanBoxServicePaths[key];
+        }
+      });
+      if (Object.keys(serializedServicePaths).length) {
+        serialized.xplanBoxServicePaths =
+          serializedServicePaths as XplanBoxServicePaths;
       }
 
       if (

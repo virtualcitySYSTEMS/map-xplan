@@ -103,7 +103,9 @@
               l?.deactivate();
             });
           } else {
-            await Promise.all(layers.map((l) => l?.activate()));
+            await Promise.all(
+              layers.filter((l) => !!l).map((l) => l.activate()),
+            );
           }
         },
       }),
@@ -154,7 +156,9 @@
               l?.deactivate();
             });
           } else {
-            await Promise.all(layers.map((l) => l?.activate()));
+            await Promise.all(
+              layers.filter((l) => !!l).map((l) => l.activate()),
+            );
           }
         },
       }),

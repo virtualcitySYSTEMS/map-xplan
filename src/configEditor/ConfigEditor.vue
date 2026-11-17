@@ -16,13 +16,16 @@
     BPPlanListAttribute,
     DEFAULT_BEZUGSPUNKT_PRIORITY,
     DEFAULT_HEIGHT_ATTRIBUTE_PRIORITY,
+    DEFAULT_XPLAN_BOX_SERVICE_PATHS,
     DEFAULT_STOREY_ATTRIBUTE_PRIORITY,
     getMergedConfig,
+    getMergedServicePaths,
     TERRAIN_LEVEL_METHOD_VALUES,
   } from '../defaultOptions.js';
   import {
     XPLAN_BOX_SERVICES,
     SUPPORTED_XPLAN_BOX_VERSIONS,
+    type XplanBoxServicePaths,
   } from '../xplanAPI.js';
   import {
     predefinedStyles,
@@ -76,6 +79,10 @@
     },
   );
 
+  const servicePathKeys = Object.keys(
+    DEFAULT_XPLAN_BOX_SERVICE_PATHS,
+  ) as (keyof XplanBoxServicePaths)[];
+
   const requiredRule = (v?: string | number): true | string => {
     if (v === null || v === undefined) {
       return 'components.validation.required';
@@ -102,6 +109,7 @@
 
   const submit = (): void => {
     const c = structuredClone(toRaw(localConfig.value));
+    c.xplanBoxServicePaths = getMergedServicePaths(c.xplanBoxServicePaths);
     c.xplanBoxServices.sort((a, b) => {
       return XPLAN_BOX_SERVICES.indexOf(a) - XPLAN_BOX_SERVICES.indexOf(b);
     });
@@ -204,6 +212,34 @@
             <VcsCheckbox
               v-model="localConfig.filterInitiallyOpen"
               label="xplan.editor.filterInitiallyOpen"
+            />
+          </v-col>
+        </v-row>
+      </v-container>
+    </VcsFormSection>
+    <VcsFormSection heading="xplan.editor.servicePaths" expandable>
+      <template #help>
+        <p>{{ $st('xplan.editor.servicePathsHelp') }}</p>
+        <p class="text-break">
+          https://xplanbox.example.com/<strong>{{
+            DEFAULT_XPLAN_BOX_SERVICE_PATHS.synWfs
+          }}</strong
+          >/services/xplansynwfs
+        </p>
+      </template>
+      <v-container class="py-0 px-1">
+        <v-row v-for="key in servicePathKeys" :key="key" no-gutters>
+          <v-col>
+            <VcsLabel :html-for="`xplan-editor-servicePath-${key}`">
+              {{ $st(`xplan.editor.${key}Path`) }}
+            </VcsLabel>
+          </v-col>
+          <v-col>
+            <VcsTextField
+              :id="`xplan-editor-servicePath-${key}`"
+              v-model="localConfig.xplanBoxServicePaths[key]"
+              clearable
+              :placeholder="DEFAULT_XPLAN_BOX_SERVICE_PATHS[key]"
             />
           </v-col>
         </v-row>

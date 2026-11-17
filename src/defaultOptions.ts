@@ -1,5 +1,10 @@
 import type { ProjectionOptions } from '@vcmap/core';
-import type { PlanQuery, XplanBoxService, XplanBoxVersion } from './xplanAPI';
+import type {
+  PlanQuery,
+  XplanBoxService,
+  XplanBoxServicePaths,
+  XplanBoxVersion,
+} from './xplanAPI';
 import { defaultStyles } from './cubeStyles.js';
 
 export const xplanWindowId = 'xplan-window-id';
@@ -253,6 +258,33 @@ export enum BPPlanListAttribute {
   NUMMER = 'nummer',
 }
 
+/**
+ * Context paths used by the official xPlanBox Docker images.
+ */
+export const DEFAULT_XPLAN_BOX_SERVICE_PATHS: Readonly<XplanBoxServicePaths> =
+  Object.freeze({
+    synWfs: 'xplansyn-wfs',
+    wfs: 'xplan-wfs',
+    wms: 'xplan-wms',
+  });
+
+/**
+ * Merges configured service paths with the defaults. Paths are trimmed; missing,
+ * empty or non-string paths fall back to the default path.
+ */
+export function getMergedServicePaths(
+  paths?: Partial<Record<keyof XplanBoxServicePaths, unknown>> | null,
+): XplanBoxServicePaths {
+  const merged = { ...DEFAULT_XPLAN_BOX_SERVICE_PATHS };
+  (Object.keys(merged) as (keyof XplanBoxServicePaths)[]).forEach((key) => {
+    const path = paths?.[key];
+    if (typeof path === 'string' && path.trim()) {
+      merged[key] = path.trim();
+    }
+  });
+  return merged;
+}
+
 export type Style3dOptions = Record<XplanBoxService, string>;
 
 export type XplanConfig = {
@@ -262,6 +294,7 @@ export type XplanConfig = {
   defaultStyle3d: Style3dOptions;
   xplanBoxUrl: string;
   xplanBoxVersion: XplanBoxVersion;
+  xplanBoxServicePaths: XplanBoxServicePaths;
   xplanBoxServices: XplanBoxService[];
   filterInitiallyOpen: boolean;
   cubeCreationOptions: CubeCreationOptions;
@@ -278,6 +311,7 @@ export default function getDefaultOptions(): XplanConfig {
     bpPlanListAttribute: BPPlanListAttribute.NAME,
     xplanBoxUrl: '',
     xplanBoxVersion: 7,
+    xplanBoxServicePaths: { ...DEFAULT_XPLAN_BOX_SERVICE_PATHS },
     xplanBoxServices: ['pre', 'current'],
     filterInitiallyOpen: true,
     additionalStyles3d: [],
@@ -310,6 +344,7 @@ export function getMergedConfig(config: XplanConfig): XplanConfig {
       ...defaultConfig.cubeCreationOptions,
       ...config.cubeCreationOptions,
     },
+    xplanBoxServicePaths: getMergedServicePaths(config.xplanBoxServicePaths),
   };
 }
 

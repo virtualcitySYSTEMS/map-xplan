@@ -59,6 +59,16 @@ export const SUPPORTED_XPLAN_BOX_VERSIONS = [7, 8, 9] as const;
 
 export type XplanBoxVersion = (typeof SUPPORTED_XPLAN_BOX_VERSIONS)[number];
 
+/**
+ * Web context paths of the xPlanBox services, relative to the xPlanBox base URL.
+ * They depend on how the services are deployed, not on the xPlanBox version.
+ */
+export type XplanBoxServicePaths = {
+  synWfs: string;
+  wfs: string;
+  wms: string;
+};
+
 export type PlanAPI = {
   type: (typeof FEATURE_TYPE)[3];
   xplanVersion: (typeof SUPPORTED_XPLAN_VERSIONS)[number];
@@ -286,35 +296,90 @@ function getServiceSuffix(xplanBoxService: XplanBoxService): string {
   return xplanBoxService;
 }
 
-function getSynwfsUrl(xplanBoxUrl: string, service: XplanBoxService): string {
-  return `${xplanBoxUrl.replace(/\/$/, '')}/xplansyn-wfs/services/xplansynwfs${getServiceSuffix(service)}`;
+/**
+ * Builds a service URL from a base URL, path segments and query parameters.
+ * Leading and trailing slashes of the segments are removed, inner slashes are kept.
+ * Characters which are not valid in a path (e.g. space, ?, #) are percent-encoded.
+ * A query string on the base URL is preserved, the given params are appended to it.
+ * Relative base URLs are resolved against the current location.
+ */
+export function buildUrl(
+  base: string,
+  segments: string[],
+  params: Record<string, string> = {},
+): string {
+  const url = new URL(base, window.location.href);
+  url.pathname = [
+    url.pathname.replace(/\/+$/, ''),
+    ...segments.map((s) => s.replace(/^\/+|\/+$/g, '')),
+  ].join('/');
+  Object.entries(params).forEach(([k, v]) => {
+    url.searchParams.set(k, v);
+  });
+  return url.toString();
 }
 
-function getPlanUrl(
+export function getSynwfsUrl(
   xplanBoxUrl: string,
+  paths: XplanBoxServicePaths,
+  service: XplanBoxService,
+): string {
+  return buildUrl(xplanBoxUrl, [
+    paths.synWfs,
+    'services',
+    `xplansynwfs${getServiceSuffix(service)}`,
+  ]);
+}
+
+export function getPlanUrl(
+  xplanBoxUrl: string,
+  paths: XplanBoxServicePaths,
   service: XplanBoxService,
   xplanVersion: XplanVersion,
   name: string,
 ): string {
-  return `${xplanBoxUrl.replace(/\/$/, '')}/xplan-wfs/services/wfs${xplanVersion.replace(/\./, '')}${getServiceSuffix(
-    service,
-  )}?service=WFS&version=2.0.0&request=GetFeature&resolvedepth=*&resolve=all&StoredQuery_ID=urn:ogc:def:query:OGC-WFS::PlanName&planName=${name}`;
+  return buildUrl(
+    xplanBoxUrl,
+    [
+      paths.wfs,
+      'services',
+      `wfs${xplanVersion.replace(/\./, '')}${getServiceSuffix(service)}`,
+    ],
+    {
+      service: 'WFS',
+      version: '2.0.0',
+      request: 'GetFeature',
+      resolvedepth: '*',
+      resolve: 'all',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      StoredQuery_ID: 'urn:ogc:def:query:OGC-WFS::PlanName',
+      planName: name,
+    },
+  );
 }
 
-function getPlanWMSUrl(
+export function getPlanWMSUrl(
   xplanBoxUrl: string,
+  paths: XplanBoxServicePaths,
   service: XplanBoxService,
   name: string,
 ): string {
-  return `${xplanBoxUrl.replace(/\/+$/, '')}/xplan-wms/services/planwerkwms${getServiceSuffix(service)}/planname/${name.replace(/\//g, '')}`;
+  return buildUrl(xplanBoxUrl, [
+    paths.wms,
+    'services',
+    `planwerkwms${getServiceSuffix(service)}`,
+    'planname',
+    encodeURIComponent(name.replace(/\//g, '')),
+  ]);
 }
 
 export async function getHits(
   xplanBoxUrl: string,
+  paths: XplanBoxServicePaths,
   service: XplanBoxService,
   query: PlanQuery,
 ): Promise<number> {
-  const serverUrl = getSynwfsUrl(xplanBoxUrl, service);
+  const serverUrl = getSynwfsUrl(xplanBoxUrl, paths, service);
   const getFeature = createGetFeaturesRequest(
     {
       ...query,
@@ -352,6 +417,7 @@ export async function getHits(
 
 export async function getPlanFeatures(
   xplanBoxUrl: string,
+  paths: XplanBoxServicePaths,
   service: XplanBoxService,
   query: PlanQuery,
   hooks?: {
@@ -359,7 +425,7 @@ export async function getPlanFeatures(
     onErrorReadingFeatures?: () => void;
   },
 ): Promise<Plan[]> {
-  const serverUrl = getSynwfsUrl(xplanBoxUrl, service);
+  const serverUrl = getSynwfsUrl(xplanBoxUrl, paths, service);
   const getFeature = createGetFeaturesRequest(query);
   const response = await fetch(serverUrl, {
     method: 'POST',
@@ -413,8 +479,14 @@ export async function getPlanFeatures(
         plan[xplanFeatureTypeSymbol] = {
           type: 'BP_Plan',
           xplanVersion,
-          getByIdUrl: getPlanUrl(xplanBoxUrl, service, xplanVersion, name),
-          wmsUrl: getPlanWMSUrl(xplanBoxUrl, service, name),
+          getByIdUrl: getPlanUrl(
+            xplanBoxUrl,
+            paths,
+            service,
+            xplanVersion,
+            name,
+          ),
+          wmsUrl: getPlanWMSUrl(xplanBoxUrl, paths, service, name),
         };
         return plan;
       }

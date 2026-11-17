@@ -1,3 +1,8 @@
+# 2.2.0
+
+- add `xplanBoxServicePaths` config option to configure the web context paths of XPlanSynWFS, XPlanWFS and XPlanWMS (they depend on the deployment, e.g. `xplan-services-wfs-syn` instead of `xplansyn-wfs`)
+- fix service URLs: keep a query string on `xplanBoxUrl` (e.g. proxy parameters) and encode service paths and plan names, so plans with special characters like `&`, `?` or `#` in their name can be loaded
+
 # v2.1.0
 
 - add vegetationCreationOptions to define _BP_AnpflanzungBindungErhaltung_ `Gegenstand` values which should be displayed with default or custom tree model together with 3d cubes
